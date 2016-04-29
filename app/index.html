@@ -9,13 +9,14 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="appointmentSchedulerFeApp">
+  <body ng-app="scheduler">
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -33,14 +34,14 @@
               <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="#/">appointmentSchedulerFe</a>
+            <a class="navbar-brand" href="#/">AppointmentScheduler</a>
           </div>
 
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">Home</a></li>
-              <li><a ng-href="#/about">About</a></li>
+              <li class="active"><a href="#/">Meeting Schedule</a></li>
+              <li><a ng-href="#/scheduler">Set Appointment</a></li>
               <li><a ng-href="#/">Contact</a></li>
             </ul>
           </div>
@@ -48,13 +49,11 @@
       </div>
     </div>
 
-    <div class="container">
     <div ng-view=""></div>
-    </div>
 
     <div class="footer">
       <div class="container">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
+        <p>IT Department, Midway Maritime Foundation Inc.</p>
       </div>
     </div>
 
@@ -81,13 +80,28 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/fullcalendar/dist/fullcalendar.js"></script>
+    <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/satellizer/satellizer.js"></script>
+    <script src="bower_components/lodash/dist/lodash.js"></script>
+    <script src="bower_components/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
+        <!-- Controllers -->
         <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
+        <script src="scripts/controllers/aboutCtrl.js"></script>
+        <script src="scripts/controllers/authCtrl.js"></script>
+        <script src="scripts/controllers/appointmentCtrl.js"></script>
+
+        <!-- Services -->
+        <script src="scripts/services/auth.js"></script>
+        <script src="scripts/services/employee.js"></script>
+        <script src="scripts/services/department.js"></script>
         <!-- endbuild -->
 </body>
 </html>

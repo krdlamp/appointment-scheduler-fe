@@ -7,7 +7,7 @@
  * # AboutCtrl
  * Controller of the appointmentSchedulerFeApp
  */
-angular.module('appointmentSchedulerFeApp')
+angular.module('scheduler')
   .controller('AboutCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',

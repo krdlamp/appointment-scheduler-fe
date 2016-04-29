@@ -9,6 +9,7 @@ body {
   padding: 0;
 }
 
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
@@ -18,6 +19,7 @@ body {
 }
 
 /* Custom page header */
+
 .header {
   border-bottom: 1px solid #e5e5e5;
   margin-bottom: 10px;
