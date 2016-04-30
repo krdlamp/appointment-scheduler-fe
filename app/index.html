@@ -34,15 +34,24 @@
               <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="#/">AppointmentScheduler</a>
+            <a class="navbar-brand" href="#/">MyScheduler</a>
           </div>
 
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">Meeting Schedule</a></li>
-              <li><a ng-href="#/scheduler">Set Appointment</a></li>
-              <li><a ng-href="#/">Contact</a></li>
+            <li class=""><a href="#/">Meeting Schedule</a></li>
+            <li class=""><a href="#/">My Appointments <span class="badge">5</span> </a></li>
+            <li><a ng-href="#/scheduler">Set Appointment</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> User <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                      <li><a href="#">Change Password</a></li>
+                      <li><a ng-click="logout()">Logout</a></li>
+                  </ul>
+              </li>
             </ul>
           </div>
         </div>
@@ -51,6 +60,7 @@
 
     <div ng-view=""></div>
 
+    <br>
     <div class="footer">
       <div class="container">
         <p>IT Department, Midway Maritime Foundation Inc.</p>
@@ -85,8 +95,7 @@
     <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/satellizer/satellizer.js"></script>
-    <script src="bower_components/lodash/dist/lodash.js"></script>
-    <script src="bower_components/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
