@@ -1,0 +1,15 @@
+{
+  "RECORDS": [{
+    "id":1,
+    "description":"Scheduled"
+  }, {
+    "id":2,
+    "description":"Re-scheduled"
+  }, {
+    "id":3,
+    "description":"Deferred"
+  }, {
+    "id":4,
+    "description":"Cancelled"
+  }]
+}
