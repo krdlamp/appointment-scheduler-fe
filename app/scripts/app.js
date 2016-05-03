@@ -19,13 +19,15 @@ angular
         'ui.calendar',
         'ui.router',
         'satellizer',
-        'ui.bootstrap'
+        'ui.bootstrap',
+        'ui.select'
     ])
     .constant('Config', {
         apiBase: document.domain === 'localhost' ? '//localhost:8000/api' : '//api.scheduler.dev/api',
     })
     .config(function ($routeProvider, $httpProvider, $authProvider, $provide, Config) {
         $httpProvider.defaults.useXDomain = true;
+        $httpProvider.defaults.paramSerializer = '$httpParamSerializerJQLike';
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
         $authProvider.loginUrl = Config.apiBase + '/authenticate';
         $authProvider.httpInterceptor = false;

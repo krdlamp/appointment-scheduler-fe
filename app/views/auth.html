@@ -1,19 +1,21 @@
-<form class="form-horizontal">
-    <div class="form-group">
-        <label class="col-xs-3 control-label">Employee No.</label>
-        <div class="col-xs-9">
-            <input type="text" class="form-control" placeholder="Employee Number" ng-model="loginData.emp_num">
+<div class="container">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-xs-3 control-label">Employee No.</label>
+            <div class="col-xs-9">
+                <input type="text" class="form-control" placeholder="Employee Number" ng-model="loginData.emp_num">
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="col-xs-3 control-label">Password</label>
-        <div class="col-xs-9">
-            <input type="password" class="form-control" placeholder="Password" ng-model="loginData.password">
+        <div class="form-group">
+            <label class="col-xs-3 control-label">Password</label>
+            <div class="col-xs-9">
+                <input type="password" class="form-control" placeholder="Password" ng-model="loginData.password">
+            </div>
         </div>
-    </div>
-    <div class="btn-group">
-        <button class="btn btn-primary" ng-click="login()">
-            Save
-        </button>
-    </div>
-</form>
+        <div class="btn-group">
+            <button class="btn btn-primary pull-right" ng-click="login()">
+                Save
+            </button>
+        </div>
+    </form>
+</div>

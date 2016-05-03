@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('scheduler')
-    .controller('AppointmentCtrl', function($rootScope, $route, $scope, Employee, Department, Appointment, $uibModal) {
+    .controller('AppointmentCtrl', function($rootScope, $location, $route, $scope, Employee, Department, Appointment, $uibModal) {
         // Configure calendar object
         $scope.uiConfig = {
             calendar:{
@@ -92,14 +92,14 @@ angular.module('scheduler')
 
             data.employees   = $scope.selectedEmps;
             data.set_date    = $scope.set_date;
-            data.start_time  = $scope.start_time;
-            data.end_time    = $scope.end_time;
+            data.start_time  = $scope.start_time.toLocaleTimeString();
+            data.end_time    = $scope.end_time.toLocaleTimeString();
             data.purpose     = $scope.purpose;
             data.agendas     = $scope.agendas;
             data.status      = 'Scheduled';
             
             Appointment.create(data).then(function () {
-                location.path('/calendar');
+                $location.path('/calendar');
             });
         }
     });

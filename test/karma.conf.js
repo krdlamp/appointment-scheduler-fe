@@ -35,6 +35,9 @@ module.exports = function(config) {
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/satellizer/satellizer.js',
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'bower_components/select2/select2.js',
+      'bower_components/angular-select2/dist/angular-select2.js',
+      'bower_components/ui-select/dist/select.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',
