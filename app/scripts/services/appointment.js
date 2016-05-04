@@ -19,6 +19,7 @@ angular.module('scheduler')
                         Authorization: 'Bearer' + $auth.getToken()
                     },
                     data: {
+                        subject: appointment.subject,
                         set_date: appointment.set_date,
                         start_time: appointment.start_time,
                         end_time: appointment.end_time,
