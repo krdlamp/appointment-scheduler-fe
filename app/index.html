@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css" />
     <link rel="stylesheet" href="bower_components/select2/select2.css" />
     <link rel="stylesheet" href="bower_components/ui-select/dist/select.css" />
+    <link rel="stylesheet" href="bower_components/angular-flash-alert/dist/angular-flash.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -47,13 +48,14 @@
             <li><a ng-href="#/scheduler">Set Appointment</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li class="dropdown">
+                <li><a ng-href="#/login">Login</a></li>
+                <li class="dropdown">
                   <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> User <span class="caret"></span></a>
                   <ul class="dropdown-menu">
                       <li><a href="#">Change Password</a></li>
-                      <li><a ng-click="logout()">Logout</a></li>
+                      <li><a href="" ng-click="logout()">Logout</a></li>
                   </ul>
-              </li>
+                </li>
             </ul>
           </div>
         </div>
@@ -84,6 +86,7 @@
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
@@ -101,6 +104,11 @@
     <script src="bower_components/select2/select2.js"></script>
     <script src="bower_components/angular-select2/dist/angular-select2.js"></script>
     <script src="bower_components/ui-select/dist/select.js"></script>
+    <script src="bower_components/ev-emitter/ev-emitter.js"></script>
+    <script src="bower_components/imagesloaded/imagesloaded.js"></script>
+    <script src="bower_components/qtip2/jquery.qtip.js"></script>
+    <script src="bower_components/qtip2/basic/jquery.qtip.js"></script>
+    <script src="bower_components/angular-flash-alert/dist/angular-flash.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

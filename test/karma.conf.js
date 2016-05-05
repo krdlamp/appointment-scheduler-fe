@@ -38,6 +38,12 @@ module.exports = function(config) {
       'bower_components/select2/select2.js',
       'bower_components/angular-select2/dist/angular-select2.js',
       'bower_components/ui-select/dist/select.js',
+      'bower_components/ev-emitter/ev-emitter.js',
+      'bower_components/imagesloaded/imagesloaded.js',
+      'bower_components/qtip2/jquery.qtip.js',
+      'bower_components/qtip2/basic/jquery.qtip.js',
+      'bower_components/angular-flash-alert/dist/angular-flash.js',
+      'bower_components/jquery-ui/jquery-ui.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

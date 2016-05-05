@@ -1,8 +1,7 @@
 'use strict';
 
 angular.module('scheduler')
-    .controller('AppointmentCtrl', function($rootScope, $filter, $location, $route, $scope, Employee, Department, Appointment, Config, $uibModal) {
-
+    .controller('AppointmentCtrl', function($rootScope, $filter, $location, $route, $scope, Flash, Employee, Department, Appointment, Config, $uibModal) {
         var baseUrl = Config.apiBase + '/appointments';
 
         // Configure calendar object
@@ -43,8 +42,12 @@ angular.module('scheduler')
             angular.forEach(appointments, function (value) {
                 var meeting = {
                     title: value.subject,
+                    date: value.set_date,
                     start: value.set_date + ' ' + value.start_time,
-                    url: '/',
+                    start_time: value.start_time,
+                    end_time: value.end_time,
+                    purpose: value.purpose,
+                    url: 'appointment/' + value.id + '/details',
                     allDay: false
                 }
                 $scope.events.push(meeting);
@@ -88,22 +91,42 @@ angular.module('scheduler')
             data.purpose     = $scope.purpose;
             data.agendas     = $scope.agendas;
             data.status      = 'Scheduled';
-            console.log(data.start_time);
-            console.log(data.end_time);
 
-            if ($scope.appointments > 0) {
+            if ($scope.appointments.length > 0) {
+                var conflicts = [];
                 angular.forEach($scope.appointments, function (value) {
                     if (value.set_date === data.set_date) {
-                        if (value.start_time >= data.start_time && value.end_time <= data.end_time) {
-                            console.log('Time not available');
+                        var formatTime = function (time) {
+                            var timeTokens = time.split(':');
+                            return new Date(1970,0,1, timeTokens[0], timeTokens[1], timeTokens[2]);
                         }
-                        else {
-                            Appointment.create(data).then(function () {
-                                $location.path('/calendar');
-                            });
+                        var formatted_start_time = formatTime(value.start_time);
+                        var value_start_time = $filter('date')(formatted_start_time, 'hh:mm a', 'UTC+08:00');
+                        var formatted_end_time = formatTime(value.end_time);
+                        var value_end_time = $filter('date')(formatted_end_time, 'hh:mm a', 'UTC+08:00');
+                        if (value_start_time == data.start_time) {
+                            conflicts.push(value);
+                            console.log(conflicts.length);
+                        }
+                        if (data.start_time > value_start_time && data.start_time < value_end_time) {
+                            conflicts.push(value);
+                            console.log(conflicts.length);
+                        }
+                        if (data.end_time > value_start_time && data.end_time < value_end_time) {
+                            conflicts.push(value);
+                            console.log(conflicts.length);
                         }
                     }
-                })
+                });
+                if (conflicts.length > 0) {
+                    var message = 'Warning: Time not available!';
+                    Flash.create('danger', message, true);
+                    console.log('Time not available');
+                } else {
+                    Appointment.create(data).then(function () {
+                        $location.path('/calendar');
+                    });
+                }
             } else {
                 Appointment.create(data).then(function () {
                     $location.path('/calendar');

@@ -11,7 +11,7 @@ angular.module('scheduler')
         $scope.loginError = false;
         $scope.loginErrorText;
 
-        $scope.login = function() {
+        $rootScope.login = function() {
             var credentials = {
                 emp_num: $scope.loginData.emp_num,
                 password: $scope.loginData.password
@@ -62,12 +62,27 @@ angular.module('scheduler')
         }
 
         $rootScope.logout = function() {
+            console.log('User logged out...');
             $auth.logout().then(function() {
                 localStorage.removeItem('user');
 
                 $rootScope.authenticated = false;
 
                 $rootScope.currentUser = null;
+            });
+        }
+    })
+    .run(function ($rootScope, $auth, $location) {
+        $rootScope.logout = function() {
+            console.log('logout clicked');
+            $auth.logout().then(function() {
+                localStorage.removeItem('user');
+
+                $rootScope.authenticated = false;
+
+                $rootScope.currentUser = null;
+                $location.path('/login');
+                window.alert('You are now logged out!');
             })
         }
-    });
+    })

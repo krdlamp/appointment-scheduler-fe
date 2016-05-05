@@ -4,11 +4,15 @@
     <list default="true" id="81283026-5ab7-4e28-aaea-6ab6b4e063d1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/index.html" afterPath="$PROJECT_DIR$/app/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/app.js" afterPath="$PROJECT_DIR$/app/scripts/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/controllers/appointmentCtrl.js" afterPath="$PROJECT_DIR$/app/scripts/controllers/appointmentCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/controllers/authCtrl.js" afterPath="$PROJECT_DIR$/app/scripts/controllers/authCtrl.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/services/appointment.js" afterPath="$PROJECT_DIR$/app/scripts/services/appointment.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/styles/main.css" afterPath="$PROJECT_DIR$/app/styles/main.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/calendar.html" afterPath="$PROJECT_DIR$/app/views/calendar.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/scheduler.html" afterPath="$PROJECT_DIR$/app/views/scheduler.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower.json" afterPath="$PROJECT_DIR$/bower.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/karma.conf.js" afterPath="$PROJECT_DIR$/test/karma.conf.js" />
     </list>
     <ignored path="appointment-scheduler-fe.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,8 +37,8 @@
       <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/styles/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="63" column="32" selection-start-line="63" selection-start-column="30" selection-end-line="63" selection-end-column="34" />
+            <state relative-caret-position="234">
+              <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -43,55 +47,8 @@
       <file leaf-file-name="appointmentCtrl.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/scripts/controllers/appointmentCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="19" column="34" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fullcalendar.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bower_components/fullcalendar/dist/fullcalendar.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-19242">
-              <caret line="2597" column="0" selection-start-line="2597" selection-start-column="0" selection-end-line="2597" selection-end-column="0" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <marker date="1461568708000" expanded="true" signature="153522:153770" placeholder="..." />
-                <marker date="1461568708000" expanded="true" signature="158283:158628" placeholder="..." />
-                <marker date="1461568708000" expanded="true" signature="158436:158614" placeholder="..." />
-                <marker date="1461568708000" expanded="true" signature="158453:158599" placeholder="..." />
-                <marker date="1461568708000" expanded="true" signature="170788:170890" placeholder="..." />
-                <marker date="1461568708000" expanded="true" signature="170969:171486" placeholder="..." />
-                <marker date="1461568708000" expanded="true" signature="171131:171282" placeholder="..." />
-                <marker date="1461568708000" expanded="true" signature="189873:189959" placeholder="..." />
-                <marker date="1461568708000" expanded="true" signature="189889:189945" placeholder="..." />
-                <marker date="1461568708000" expanded="true" signature="190808:190973" placeholder="..." />
-                <marker date="1461568708000" expanded="true" signature="190844:190940" placeholder="..." />
-                <marker date="1461568708000" expanded="true" signature="211431:212259" placeholder="..." />
-                <marker date="1461568708000" expanded="true" signature="211587:211987" placeholder="..." />
-                <marker date="1461568708000" expanded="true" signature="335437:335563" placeholder="..." />
-                <marker date="1461568708000" expanded="true" signature="335454:335549" placeholder="..." />
-                <marker date="1461568708000" expanded="true" signature="335869:335992" placeholder="..." />
-                <marker date="1461568708000" expanded="true" signature="335886:335978" placeholder="..." />
-                <marker date="1461568708000" expanded="true" signature="342572:343045" placeholder="..." />
-                <marker date="1461568708000" expanded="true" signature="342759:343029" placeholder="..." />
-                <marker date="1461568708000" expanded="true" signature="342773:343012" placeholder="..." />
-                <marker date="1461568708000" expanded="true" signature="342828:342997" placeholder="..." />
-                <marker date="1461568708000" expanded="true" signature="351654:351761" placeholder="..." />
-                <marker date="1461568708000" expanded="true" signature="351671:351747" placeholder="..." />
-                <marker date="1461568708000" expanded="true" signature="352773:352918" placeholder="..." />
-                <marker date="1461568708000" expanded="true" signature="352789:352905" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="38" column="66" selection-start-line="38" selection-start-column="66" selection-end-line="38" selection-end-column="66" />
+            <state relative-caret-position="504">
+              <caret line="49" column="26" selection-start-line="49" selection-start-column="26" selection-end-line="49" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -100,8 +57,48 @@
       <file leaf-file-name="calendar.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/calendar.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+            <state relative-caret-position="342">
+              <caret line="19" column="6" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="authCtrl.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/scripts/controllers/authCtrl.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="486">
+              <caret line="36" column="47" selection-start-line="36" selection-start-column="47" selection-end-line="36" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/scripts/controllers/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="10" column="36" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="95" column="81" selection-start-line="95" selection-start-column="81" selection-end-line="95" selection-end-column="81" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/scripts/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="468">
+              <caret line="35" column="41" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -110,9 +107,12 @@
       <file leaf-file-name="appointment.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/scripts/services/appointment.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
-              <folding />
+            <state relative-caret-position="720">
+              <caret line="40" column="26" selection-start-line="40" selection-start-column="26" selection-end-line="40" selection-end-column="26" />
+              <folding>
+                <marker date="1462428823584" expanded="true" signature="1284:2104" placeholder="{...}" />
+                <marker date="1462428823584" expanded="true" signature="1596:2071" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -120,8 +120,8 @@
       <file leaf-file-name="scheduler.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/scheduler.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="24" column="56" selection-start-line="24" selection-start-column="56" selection-end-line="24" selection-end-column="56" />
+            <state relative-caret-position="36">
+              <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -136,7 +136,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/app/scripts/controllers/about.js" />
-        <option value="$PROJECT_DIR$/app/scripts/controllers/main.js" />
         <option value="$PROJECT_DIR$/app/scripts/controllers/auth.js" />
         <option value="$PROJECT_DIR$/app/scripts/services/auth.js" />
         <option value="$PROJECT_DIR$/bower_components/satellizer/satellizer.js" />
@@ -145,16 +144,17 @@
         <option value="$PROJECT_DIR$/app/scripts/services/employee.js" />
         <option value="$PROJECT_DIR$/app/scripts/services/department.js" />
         <option value="$PROJECT_DIR$/bower.json" />
-        <option value="$PROJECT_DIR$/app/scripts/controllers/authCtrl.js" />
         <option value="$PROJECT_DIR$/app/views/employeeModal.html" />
         <option value="$PROJECT_DIR$/app/json/status.json" />
         <option value="$PROJECT_DIR$/app/views/auth.html" />
-        <option value="$PROJECT_DIR$/app/scripts/app.js" />
+        <option value="$PROJECT_DIR$/app/scripts/controllers/main.js" />
+        <option value="$PROJECT_DIR$/app/scripts/controllers/authCtrl.js" />
         <option value="$PROJECT_DIR$/app/scripts/services/appointment.js" />
         <option value="$PROJECT_DIR$/app/views/scheduler.html" />
-        <option value="$PROJECT_DIR$/app/views/calendar.html" />
-        <option value="$PROJECT_DIR$/app/index.html" />
+        <option value="$PROJECT_DIR$/app/scripts/app.js" />
         <option value="$PROJECT_DIR$/app/styles/main.css" />
+        <option value="$PROJECT_DIR$/app/index.html" />
+        <option value="$PROJECT_DIR$/app/views/calendar.html" />
         <option value="$PROJECT_DIR$/app/scripts/controllers/appointmentCtrl.js" />
       </list>
     </option>
@@ -197,6 +197,7 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -347,19 +348,21 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/repos/senior-high-fe" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="/usr/bin/node" />
     <property name="js-jscs-package" value="$PROJECT_DIR$/node_modules/jscs" />
-    <property name="SearchEverywhereHistoryKey" value="fullca&#9;FILE&#9;file:///home/it-maylyn/mmfi_projects/appointment-scheduler/appointment-scheduler-fe/bower_components/fullcalendar/dist/fullcalendar.js&#10;main&#9;FILE&#9;file:///home/it-maylyn/mmfi_projects/appointment-scheduler/appointment-scheduler-fe/app/styles/main.css&#10;inde&#9;FILE&#9;file:///home/it-maylyn/mmfi_projects/appointment-scheduler/appointment-scheduler-fe/app/index.html&#10;calenda&#9;FILE&#9;file:///home/it-maylyn/mmfi_projects/appointment-scheduler/appointment-scheduler-fe/app/views/calendar.html&#10;in&#9;FILE&#9;file:///home/it-maylyn/mmfi_projects/appointment-scheduler/appointment-scheduler-fe/app/index.html&#10;bower&#9;FILE&#9;file:///home/it-maylyn/mmfi_projects/appointment-scheduler/appointment-scheduler-fe/bower.json&#10;appo&#9;FILE&#9;file:///home/it-maylyn/mmfi_projects/appointment-scheduler/appointment-scheduler-fe/app/scripts/controllers/appointmentCtrl.js&#10;sa&#9;FILE&#9;file:///home/it-maylyn/mmfi_projects/appointment-scheduler/appointment-scheduler-fe/bower_components/satellizer/satellizer.js&#10;sate&#9;FILE&#9;file:///home/it-maylyn/mmfi_projects/appointment-scheduler/appointment-scheduler-fe/bower_components/satellizer/satellizer.js&#10;app&#9;FILE&#9;file:///home/it-maylyn/mmfi_projects/appointment-scheduler/appointment-scheduler-fe/app/scripts/app.js&#10;auth&#9;FILE&#9;file:///home/it-maylyn/mmfi_projects/appointment-scheduler/appointment-scheduler-fe/app/scripts/controllers/authCtrl.js&#10;boot&#9;FILE&#9;file:///home/it-maylyn/mmfi_projects/appointment-scheduler/appointment-scheduler-fe/bower_components/bootstrap/dist/css/bootstrap.css&#10;.container&#9;null&#9;null&#10;container-na&#9;null&#9;null&#10;container-n&#9;null&#9;null&#10;authprovider&#9;null&#9;null&#10;satell&#9;FILE&#9;file:///home/it-maylyn/mmfi_projects/appointment-scheduler/appointment-scheduler-fe/bower_components/satellizer/satellizer.js" />
+    <property name="SearchEverywhereHistoryKey" value="fc-more-pop&#9;null&#9;null&#10;fullca&#9;FILE&#9;file:///home/it-maylyn/mmfi_projects/appointment-scheduler/appointment-scheduler-fe/bower_components/fullcalendar/dist/fullcalendar.js&#10;main&#9;FILE&#9;file:///home/it-maylyn/mmfi_projects/appointment-scheduler/appointment-scheduler-fe/app/styles/main.css&#10;inde&#9;FILE&#9;file:///home/it-maylyn/mmfi_projects/appointment-scheduler/appointment-scheduler-fe/app/index.html&#10;calenda&#9;FILE&#9;file:///home/it-maylyn/mmfi_projects/appointment-scheduler/appointment-scheduler-fe/app/views/calendar.html&#10;in&#9;FILE&#9;file:///home/it-maylyn/mmfi_projects/appointment-scheduler/appointment-scheduler-fe/app/index.html&#10;bower&#9;FILE&#9;file:///home/it-maylyn/mmfi_projects/appointment-scheduler/appointment-scheduler-fe/bower.json&#10;appo&#9;FILE&#9;file:///home/it-maylyn/mmfi_projects/appointment-scheduler/appointment-scheduler-fe/app/scripts/controllers/appointmentCtrl.js&#10;sa&#9;FILE&#9;file:///home/it-maylyn/mmfi_projects/appointment-scheduler/appointment-scheduler-fe/bower_components/satellizer/satellizer.js&#10;sate&#9;FILE&#9;file:///home/it-maylyn/mmfi_projects/appointment-scheduler/appointment-scheduler-fe/bower_components/satellizer/satellizer.js&#10;app&#9;FILE&#9;file:///home/it-maylyn/mmfi_projects/appointment-scheduler/appointment-scheduler-fe/app/scripts/app.js&#10;auth&#9;FILE&#9;file:///home/it-maylyn/mmfi_projects/appointment-scheduler/appointment-scheduler-fe/app/scripts/controllers/authCtrl.js&#10;boot&#9;FILE&#9;file:///home/it-maylyn/mmfi_projects/appointment-scheduler/appointment-scheduler-fe/bower_components/bootstrap/dist/css/bootstrap.css&#10;.container&#9;null&#9;null&#10;container-na&#9;null&#9;null&#10;container-n&#9;null&#9;null&#10;authprovider&#9;null&#9;null&#10;satell&#9;FILE&#9;file:///home/it-maylyn/mmfi_projects/appointment-scheduler/appointment-scheduler-fe/bower_components/satellizer/satellizer.js" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JavaScript Debug.index.html">
+    <configuration default="false" name="index.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/appointment-scheduler-fe/app/index.html">
+      <method />
+    </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
       <method />
     </configuration>
@@ -390,6 +393,14 @@
       <envs />
       <method />
     </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.index.html" />
+    </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.index.html" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
@@ -410,16 +421,17 @@
       <workItem from="1461976100919" duration="23277000" />
       <workItem from="1462147484356" duration="29298000" />
       <workItem from="1462235028040" duration="23686000" />
-      <workItem from="1462320702627" duration="27038000" />
+      <workItem from="1462320702627" duration="27241000" />
+      <workItem from="1462407252897" duration="26057000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="135719000" />
+    <option name="totallyTimeSpent" value="161979000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1010" extended-state="1" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24635416" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -427,18 +439,18 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2755214" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -449,14 +461,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/scripts/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="936">
-          <caret line="52" column="10" selection-start-line="52" selection-start-column="10" selection-end-line="52" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/services/auth.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -698,14 +702,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/controllers/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="46" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/services/auth.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -744,22 +740,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="22" column="19" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/controllers/authCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="31" column="36" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/auth.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
@@ -771,56 +751,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/scheduler.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="24" column="56" selection-start-line="24" selection-start-column="56" selection-end-line="24" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/styles/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="63" column="32" selection-start-line="63" selection-start-column="30" selection-end-line="63" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="38" column="66" selection-start-line="38" selection-start-column="66" selection-end-line="38" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/calendar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/services/appointment.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bower_components/fullcalendar/dist/fullcalendar.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-19242">
+        <state relative-caret-position="46674">
           <caret line="2597" column="0" selection-start-line="2597" selection-start-column="0" selection-end-line="2597" selection-end-column="0" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
             <marker date="1461568708000" expanded="true" signature="153522:153770" placeholder="..." />
             <marker date="1461568708000" expanded="true" signature="158283:158628" placeholder="..." />
             <marker date="1461568708000" expanded="true" signature="158436:158614" placeholder="..." />
@@ -850,10 +789,85 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/controllers/appointmentCtrl.js">
+    <entry file="file://$PROJECT_DIR$/bower_components/fullcalendar/dist/fullcalendar.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="776" column="16" selection-start-line="776" selection-start-column="16" selection-end-line="776" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/controllers/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="36" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/scheduler.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/services/appointment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="40" column="26" selection-start-line="40" selection-start-column="26" selection-end-line="40" selection-end-column="26" />
+          <folding>
+            <marker date="1462428823584" expanded="true" signature="1284:2104" placeholder="{...}" />
+            <marker date="1462428823584" expanded="true" signature="1596:2071" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/styles/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/controllers/authCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="36" column="47" selection-start-line="36" selection-start-column="47" selection-end-line="36" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="95" column="81" selection-start-line="95" selection-start-column="81" selection-end-line="95" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="35" column="41" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/calendar.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
-          <caret line="19" column="34" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
+          <caret line="19" column="6" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/controllers/appointmentCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="49" column="26" selection-start-line="49" selection-start-column="26" selection-end-line="49" selection-end-column="26" />
           <folding />
         </state>
       </provider>

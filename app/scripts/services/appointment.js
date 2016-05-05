@@ -19,16 +19,36 @@ angular.module('scheduler')
                         Authorization: 'Bearer' + $auth.getToken()
                     },
                     data: {
-                        subject: appointment.subject,
-                        set_date: appointment.set_date,
+                        subject:    appointment.subject,
+                        set_date:   appointment.set_date,
                         start_time: appointment.start_time,
-                        end_time: appointment.end_time,
-                        purpose: appointment.purpose,
-                        employees: appointment.employees,
-                        agendas: appointment.agendas,
-                        status: appointment.status
+                        end_time:   appointment.end_time,
+                        purpose:    appointment.purpose,
+                        employees:  appointment.employees,
+                        agendas:    appointment.agendas,
+                        status:     appointment.status
                     }
                 })
+            },
+            patch: function (appointment) {
+               return $http({
+                   method: 'PUT',
+                   url: baseUrl + '/' + id,
+                   headers: {
+                       'Content-Type': 'application/json',
+                       Authorization: 'Bearer' + $auth.getToken()
+                   },
+                   data: {
+                       subject:    appointment.subject,
+                       set_date:   appointment.set_date,
+                       start_time: appointment.start_time,
+                       end_time:   appointment.end_time,
+                       purpose:    appointment.purpose,
+                       employees:  appointment.employees,
+                       agendas:    appointment.agendas,
+                       status:     appointment.status
+                   }
+               }) 
             }
         }
     });
