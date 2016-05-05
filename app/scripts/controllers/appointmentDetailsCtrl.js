@@ -1,5 +1,5 @@
 'use strict';
 
-angular.module('scheduler', function() {
+angular.module('scheduler', function(Appointment, $scope) {
     
 });
