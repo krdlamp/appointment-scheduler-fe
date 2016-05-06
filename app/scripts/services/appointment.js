@@ -23,6 +23,7 @@ angular.module('scheduler')
                         set_date:   appointment.set_date,
                         start_time: appointment.start_time,
                         end_time:   appointment.end_time,
+                        set_by:     appointment.set_by,
                         purpose:    appointment.purpose,
                         employees:  appointment.employees,
                         agendas:    appointment.agendas,
@@ -33,7 +34,7 @@ angular.module('scheduler')
             patch: function (appointment) {
                return $http({
                    method: 'PUT',
-                   url: baseUrl + '/' + id,
+                   url: baseUrl + '/' + appointment.id,
                    headers: {
                        'Content-Type': 'application/json',
                        Authorization: 'Bearer' + $auth.getToken()
@@ -43,6 +44,7 @@ angular.module('scheduler')
                        set_date:   appointment.set_date,
                        start_time: appointment.start_time,
                        end_time:   appointment.end_time,
+                       set_by:     appointment.set_by,
                        purpose:    appointment.purpose,
                        employees:  appointment.employees,
                        agendas:    appointment.agendas,

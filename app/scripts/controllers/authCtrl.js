@@ -73,6 +73,7 @@ angular.module('scheduler')
         }
     })
     .run(function ($rootScope, $auth, $location) {
+        
         $rootScope.logout = function() {
             console.log('logout clicked');
             $auth.logout().then(function() {

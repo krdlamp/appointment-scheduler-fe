@@ -58,6 +58,16 @@ angular
                     controllerAs: 'appointment',
 
                 })
+                .when('/scheduler/appointment/:apptId/details', {
+                    templateUrl: 'views/appointmentDetails.html',
+                    controller: 'AppointmentDetailsCtrl',
+                    controllerAs: 'appointment-details'
+                })
+                .when('/scheduler/appointment/:apptId/edit', {
+                    templateUrl: 'views/editAppointment.html',
+                    controller: 'AppointmentDetailsCtrl',
+                    controllerAs: 'appointment-details'
+                })
                 .otherwise({
                     redirectTo: '/'
                 });

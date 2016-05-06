@@ -22,12 +22,15 @@ angular.module('scheduler')
             }
         };
 
+        var user = JSON.parse(window.localStorage.getItem('user'));
+        $scope.user = user;
+
         $scope.eventSources = [];
 
         // Get authenticated user info from local storage and
         // convert it to JSON object
-        var user = JSON.parse(window.localStorage.getItem('user'));
-        $scope.user = user;
+        // var user = JSON.parse(window.localStorage.getItem('user'));
+        // $scope.user = user;
 
         // Get employees that haven't been selected
         Employee.all().then(function(resp) {
@@ -47,7 +50,7 @@ angular.module('scheduler')
                     start_time: value.start_time,
                     end_time: value.end_time,
                     purpose: value.purpose,
-                    url: 'appointment/' + value.id + '/details',
+                    url: '#/scheduler/appointment/' + value.id + '/details',
                     allDay: false
                 }
                 $scope.events.push(meeting);
@@ -66,12 +69,12 @@ angular.module('scheduler')
             $scope.selectedEmps = JSON.parse(window.localStorage.getItem('selectedEmps'));
         }
 
-        var id = 1;
+        // var id = 1;
 
         $scope.addAgenda = function() {
             var description = $scope.agenda.description;
             $scope.agenda = {
-                'id': id++,
+                // 'id': id++,
                 'description': description
             }
             var agendas = JSON.stringify($scope.agendas.concat($scope.agenda));
@@ -88,6 +91,7 @@ angular.module('scheduler')
             data.set_date    = $filter('date')($scope.set_date, 'yyyy-MM-dd', 'UTC+08:00');
             data.start_time  = $filter('date')($scope.start_time, 'hh:mm a', 'UTC+08:00');
             data.end_time    = $filter('date')($scope.end_time, 'hh:mm a', 'UTC+08:00');
+            data.set_by      = $scope.user.id;
             data.purpose     = $scope.purpose;
             data.agendas     = $scope.agendas;
             data.status      = 'Scheduled';
@@ -104,23 +108,20 @@ angular.module('scheduler')
                         var value_start_time = $filter('date')(formatted_start_time, 'hh:mm a', 'UTC+08:00');
                         var formatted_end_time = formatTime(value.end_time);
                         var value_end_time = $filter('date')(formatted_end_time, 'hh:mm a', 'UTC+08:00');
-                        if (value_start_time == data.start_time) {
+                        if (value_start_time === data.start_time) {
                             conflicts.push(value);
-                            console.log(conflicts.length);
                         }
-                        if (data.start_time > value_start_time && data.start_time < value_end_time) {
+                        if ((data.start_time < value_end_time) && (value_start_time < data.start_time)) {
                             conflicts.push(value);
-                            console.log(conflicts.length);
                         }
-                        if (data.end_time > value_start_time && data.end_time < value_end_time) {
+                        if ((data.end_time > value_start_time) && (data.end_time < value_end_time)) {
                             conflicts.push(value);
-                            console.log(conflicts.length);
                         }
                     }
                 });
                 if (conflicts.length > 0) {
                     var message = 'Warning: Time not available!';
-                    Flash.create('danger', message, true);
+                    Flash.create('danger', message, 0, true);
                     console.log('Time not available');
                 } else {
                     Appointment.create(data).then(function () {
@@ -135,4 +136,4 @@ angular.module('scheduler')
 
         }
 
-    });
+    })
