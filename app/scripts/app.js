@@ -41,7 +41,6 @@ angular
                     templateUrl: 'views/calendar.html',
                     controller: 'AppointmentCtrl',
                     controllerAs: 'appointment',
-                    requiresLogin: true,
                 })
                 .when('/login', {
                     templateUrl: 'views/auth.html',
@@ -52,30 +51,29 @@ angular
                     templateUrl: 'views/about.html',
                     controller: 'AboutCtrl',
                     controllerAs: 'about',
-                    requiresLogin: true,
 
                 })
                 .when('/scheduler', {
                     templateUrl: 'views/scheduler.html',
                     controller: 'AppointmentCtrl',
                     controllerAs: 'appointment',
-                    requiresLogin: true,
                 })
                 .when('/scheduler/appointment/:apptId/details', {
                     templateUrl: 'views/appointmentDetails.html',
                     controller: 'AppointmentDetailsCtrl',
                     controllerAs: 'appointment-details',
-                    requiresLogin: true,
                 })
                 .when('/scheduler/appointment/:apptId/edit', {
                     templateUrl: 'views/editAppointment.html',
                     controller: 'AppointmentDetailsCtrl',
                     controllerAs: 'appointment-details',
-                    requiresLogin: true,
+                })
+                .when('/scheduler/appointments', {
+                    templateUrl: 'views/appointments.html',
+                    controller: 'AppointmentCtrl',
                 })
                 .otherwise({
                     redirectTo: '/',
-                    requiresLogin: true,
                 })
 
         $httpProvider.interceptors.push(function($q, $rootScope, $location, $localStorage, $window) {
