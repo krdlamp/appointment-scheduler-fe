@@ -17,11 +17,6 @@ angular.module('scheduler')
                 password: $scope.loginData.password
             }
 
-            // Auth.login(credentials).then(function(data) {
-            //     window.localStorage.token = data.token;
-            //     $route.redirectTo('/');
-            // })
-
             $auth.login(credentials).then(function() {
 
                 // Return an $http request for the now authenticated user
@@ -29,7 +24,7 @@ angular.module('scheduler')
                     method: 'GET',
                     url: baseUrl,
                     headers: {
-                        Authorization: 'Bearer' + $auth.getToken()
+                        Authorization: 'Bearer ' + $auth.getToken()
                     }
                 }).then(function (response) {
 
@@ -60,20 +55,12 @@ angular.module('scheduler')
 
             });
         }
-
-        $rootScope.logout = function() {
-            console.log('User logged out...');
-            $auth.logout().then(function() {
-                localStorage.removeItem('user');
-
-                $rootScope.authenticated = false;
-
-                $rootScope.currentUser = null;
-            });
-        }
     })
     .run(function ($rootScope, $auth, $location) {
-        
+        var user = JSON.parse(window.localStorage.getItem('user'));
+        if (user) {
+            $rootScope.currentUser = user;
+        }
         $rootScope.logout = function() {
             console.log('logout clicked');
             $auth.logout().then(function() {

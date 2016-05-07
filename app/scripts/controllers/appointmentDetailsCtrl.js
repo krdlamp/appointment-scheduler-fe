@@ -2,7 +2,10 @@
 
 angular.module('scheduler')
     .controller('AppointmentDetailsCtrl', function(Appointment, Flash, Employee, $rootScope, $scope, $routeParams, $filter, $uibModal, $location) {
-
+        if (!$rootScope.authenticated) {
+            $location.path('/login');
+        }
+        
         Appointment.all().then(function(resp) {
             $scope.appointments = resp.data;
         });
@@ -22,14 +25,20 @@ angular.module('scheduler')
         $scope.formattedStartTime = formatTime(resp.data.start_time);
         $scope.formattedEndTime = formatTime(resp.data.end_time);
 
+        console.log($scope.appointment.venue);
+
         var oldDate = $filter('date')(resp.data.set_date, 'MMMM d, yyyy');
-        var oldStartTime = $filter('date')($scope.formattedStartTime, 'hh:mm a');
-        var oldEndTime = $filter('date')($scope.formattedEndTime, 'hh:mm a');
+        var oldStartTime = $filter('date')($scope.formattedStartTime, 'HH:mm a');
+        var oldEndTime = $filter('date')($scope.formattedEndTime, 'HH:mm a');
 
         $scope.date = $filter('date')($scope.formattedDate, 'MMMM d, yyyy', 'UTC+08:00');
-        $scope.start = $filter('date')($scope.formattedStartTime, 'hh:mm a', 'UTC+08:00');
-        $scope.end = $filter('date')($scope.formattedEndTime, 'hh:mm a', 'UTC+08:00');
-        $scope.agendas = $scope.appointment.agendas;
+        $scope.start = $filter('date')($scope.formattedStartTime, 'HH:mm a', 'UTC+08:00');
+        $scope.end = $filter('date')($scope.formattedEndTime, 'HH:mm a', 'UTC+08:00');
+
+        var agendas = JSON.stringify($scope.appointment.agendas);
+        localStorage.setItem('agendas', agendas);
+        $scope.agendas = JSON.parse(window.localStorage.getItem('agendas'));
+
         $scope.departments = $scope.appointment.departments;
         $scope.employees = $scope.appointment.employees;
         
@@ -44,11 +53,11 @@ angular.module('scheduler')
         Employee.all().then(function (resp) {
             var emps = resp.data;
             $scope.employees = emps;
-            angular.forEach(emps, function (value) {
-                if (value.id === $scope.appointment.employee_id) {
-                    $scope.appointment.employee = value;
-                }
-            });
+            // angular.forEach(emps, function (value) {
+            //     if (value.id === $scope.appointment.employee_id) {
+            //         $scope.appointment.employee = value;
+            //     }
+            // });
         });
 
         // Initialize agendas to an empty array
@@ -69,7 +78,15 @@ angular.module('scheduler')
                 // 'id': id++,
                 'description': description
             }
-            var agendas = JSON.stringify($scope.agenda);
+            var agendas = JSON.stringify($scope.agendas.concat($scope.agenda));
+            localStorage.setItem('agendas', agendas);
+            $scope.agendas = JSON.parse(window.localStorage.getItem('agendas'));
+        }
+
+        $scope.removeAgenda = function(index) {
+            var agendas = JSON.parse(window.localStorage.getItem('agendas'));
+            agendas.splice(index, 1);
+            agendas = JSON.stringify(agendas);
             localStorage.setItem('agendas', agendas);
             $scope.agendas = JSON.parse(window.localStorage.getItem('agendas'));
         }
@@ -82,11 +99,12 @@ angular.module('scheduler')
             data.subject     = $scope.appointment.subject;
             data.employees   = $scope.selectedEmps;
             data.set_date    = $filter('date')($scope.formattedDate, 'yyyy-MM-dd', 'UTC+08:00');
-            data.start_time  = $filter('date')($scope.formattedStartTime, 'hh:mm a', 'UTC+08:00');
-            data.end_time    = $filter('date')($scope.formattedEndTime, 'hh:mm a', 'UTC+08:00');
+            data.start_time  = $filter('date')($scope.formattedStartTime, 'HH:mm a', 'UTC+08:00');
+            data.end_time    = $filter('date')($scope.formattedEndTime, 'HH:mm a', 'UTC+08:00');
             data.set_by      = $scope.appointment.employee_id;
             data.purpose     = $scope.appointment.purpose;
             data.agendas     = $scope.agendas;
+            data.venue       = $scope.venue;
 
             if ($scope.appointments.length > 0) {
                 var conflicts = [];
@@ -97,9 +115,9 @@ angular.module('scheduler')
                             return new Date(1970,0,1, timeTokens[0], timeTokens[1], timeTokens[2]);
                         }
                         var formatted_start_time = formatTime(value.start_time);
-                        var value_start_time     = $filter('date')(formatted_start_time, 'hh:mm a', 'UTC+08:00');
+                        var value_start_time     = $filter('date')(formatted_start_time, 'HH:mm a', 'UTC+08:00');
                         var formatted_end_time   = formatTime(value.end_time);
-                        var value_end_time       = $filter('date')(formatted_end_time, 'hh:mm a', 'UTC+08:00');
+                        var value_end_time       = $filter('date')(formatted_end_time, 'HH:mm a', 'UTC+08:00');
                         if ((value_start_time === data.start_time) && (value.id != data.id)) {
                             conflicts.push(value);
                         }
@@ -137,9 +155,7 @@ angular.module('scheduler')
                     $location.path('/scheduler/appointment/' + $scope.appointment.id + '/details');
                 });
             }
-
         }
-        
     })
     
 });

@@ -16,7 +16,7 @@ angular.module('scheduler')
                     url: baseUrl,
                     headers: {
                         'Content-Type': 'application/json',
-                        Authorization: 'Bearer' + $auth.getToken()
+                        Authorization: 'Bearer ' + $auth.getToken()
                     },
                     data: {
                         subject:    appointment.subject,
@@ -27,7 +27,8 @@ angular.module('scheduler')
                         purpose:    appointment.purpose,
                         employees:  appointment.employees,
                         agendas:    appointment.agendas,
-                        status:     appointment.status
+                        status:     appointment.status,
+                        venue:      appointment.venue,
                     }
                 })
             },
@@ -48,7 +49,8 @@ angular.module('scheduler')
                        purpose:    appointment.purpose,
                        employees:  appointment.employees,
                        agendas:    appointment.agendas,
-                       status:     appointment.status
+                       status:     appointment.status,
+                       venue:      appointment.venue,
                    }
                }) 
             }

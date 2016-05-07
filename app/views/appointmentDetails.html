@@ -2,7 +2,7 @@
     <div class="panel panel-primary">
         <!-- Default panel contents -->
         <div class="panel-heading">
-            <h3 class="panel-title">{{ appointment.subject }}</h3>
+            <h3 class="panel-title text-center">{{ appointment.subject }}</h3>
         </div>
         <div class="panel-body">
             <p><b><span class="fa fa-eye"></span> Purpose:</b> {{ appointment.purpose }}</p>
@@ -12,6 +12,7 @@
         <ul class="list-group">
             <li class="list-group-item"><label><span class="fa fa-calendar"></span> Date:</label> {{ date }}</li>
             <li class="list-group-item"><label><span class="fa fa-clock-o"></span> Time:</label> {{ start }} - {{ end }}</li>
+            <li class="list-group-item"><label><span class="fa fa-building-o"></span> Venue:</label> {{ appointment.venue }}</li>
         </ul>
         <ul class="list-group">
             <li class="list-group-item"><span class="fa fa-list-alt"></span> <label>Agendas:</label></li>
@@ -22,8 +23,8 @@
             <li class="list-group-item" ng-repeat="emp in employees">{{ emp.first_name }} {{ emp.last_name }}</li>
         </ul>
         <ul class="list-group">
-            <li class="list-group-item"><label><span class="fa fa-building-o"></span> Departments:</label></li>
-            <li class="list-group-item" ng-repeat="dept in departments">{{ dept.name }}</li>
+            <li class="list-group-item"><label><span class="fa fa-institution"></span> Departments:</label></li>
+            <li class="list-group-item" ng-repeat="emp in employees">{{ emp.department.name }}</li>
         </ul>
         <ul class="list-group">
             <li class="list-group-item"><label><span class="fa fa-user"></span> Appointment set by:</label> {{ appointment.employee.first_name }} {{ appointment.employee.last_name }}</li>

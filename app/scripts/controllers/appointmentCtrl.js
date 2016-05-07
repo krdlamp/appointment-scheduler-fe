@@ -2,7 +2,9 @@
 
 angular.module('scheduler')
     .controller('AppointmentCtrl', function($rootScope, $filter, $location, $route, $scope, Flash, Employee, Department, Appointment, Config, $uibModal) {
-        var baseUrl = Config.apiBase + '/appointments';
+        if (!$rootScope.authenticated) {
+            $location.path('/login');
+        }
 
         // Configure calendar object
         $scope.uiConfig = {
@@ -17,7 +19,7 @@ angular.module('scheduler')
                 dayClick: $scope.alertEventOnClick,
                 eventDrop: $scope.alertOnDrop,
                 eventResize: $scope.alertOnResize,
-                timeFormat: 'h:mm A',
+                timeFormat: 'HH:mm A',
                 ignoreTimezone: false,
             }
         };
@@ -27,14 +29,15 @@ angular.module('scheduler')
 
         $scope.eventSources = [];
 
-        // Get authenticated user info from local storage and
-        // convert it to JSON object
-        // var user = JSON.parse(window.localStorage.getItem('user'));
-        // $scope.user = user;
-
-        // Get employees that haven't been selected
         Employee.all().then(function(resp) {
-            $scope.employees = resp.data;
+            var employees = [];
+            var emps = resp.data;
+            angular.forEach(emps, function(value) {
+                if (value.id != $scope.user.id) {
+                    employees.push(value);
+                }
+            });
+            $scope.employees = employees;
         });
 
         // Get all appointments
@@ -82,12 +85,20 @@ angular.module('scheduler')
             $scope.agendas = JSON.parse(window.localStorage.getItem('agendas'));
         }
 
+        $scope.removeAgenda = function(index) {
+            var agendas = JSON.parse(window.localStorage.getItem('agendas'));
+            agendas.splice(index, 1);
+            agendas = JSON.stringify(agendas);
+            localStorage.setItem('agendas', agendas);
+            $scope.agendas = JSON.parse(window.localStorage.getItem('agendas'));
+        }
+
         // Set appointment
         $scope.schedule = function() {
             var data = [];
 
             data.subject     = $scope.subject;
-            data.employees   = $scope.selectedEmps;
+            data.employees   = $scope.selectedEmps.push($scope.user);
             data.set_date    = $filter('date')($scope.set_date, 'yyyy-MM-dd', 'UTC+08:00');
             data.start_time  = $filter('date')($scope.start_time, 'hh:mm a', 'UTC+08:00');
             data.end_time    = $filter('date')($scope.end_time, 'hh:mm a', 'UTC+08:00');
@@ -95,6 +106,7 @@ angular.module('scheduler')
             data.purpose     = $scope.purpose;
             data.agendas     = $scope.agendas;
             data.status      = 'Scheduled';
+            data.venue       = $scope.venue;
 
             if ($scope.appointments.length > 0) {
                 var conflicts = [];

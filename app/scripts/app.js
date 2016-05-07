@@ -16,6 +16,7 @@ angular
         'ngRoute',
         'ngSanitize',
         'ngTouch',
+        'ngStorage',
         'ui.calendar',
         'ui.router',
         'satellizer',
@@ -39,38 +40,77 @@ angular
                 .when('/', {
                     templateUrl: 'views/calendar.html',
                     controller: 'AppointmentCtrl',
-                    controllerAs: 'appointment'
+                    controllerAs: 'appointment',
+                    requiresLogin: true,
                 })
                 .when('/login', {
                     templateUrl: 'views/auth.html',
                     controller: 'AuthCtrl',
-                    controllerAs: 'auth'
+                    controllerAs: 'auth',
                 })
                 .when('/about', {
                     templateUrl: 'views/about.html',
                     controller: 'AboutCtrl',
                     controllerAs: 'about',
+                    requiresLogin: true,
 
                 })
                 .when('/scheduler', {
                     templateUrl: 'views/scheduler.html',
                     controller: 'AppointmentCtrl',
                     controllerAs: 'appointment',
-
+                    requiresLogin: true,
                 })
                 .when('/scheduler/appointment/:apptId/details', {
                     templateUrl: 'views/appointmentDetails.html',
                     controller: 'AppointmentDetailsCtrl',
-                    controllerAs: 'appointment-details'
+                    controllerAs: 'appointment-details',
+                    requiresLogin: true,
                 })
                 .when('/scheduler/appointment/:apptId/edit', {
                     templateUrl: 'views/editAppointment.html',
                     controller: 'AppointmentDetailsCtrl',
-                    controllerAs: 'appointment-details'
+                    controllerAs: 'appointment-details',
+                    requiresLogin: true,
                 })
                 .otherwise({
-                    redirectTo: '/'
-                });
+                    redirectTo: '/',
+                    requiresLogin: true,
+                })
+
+        $httpProvider.interceptors.push(function($q, $rootScope, $location, $localStorage, $window) {
+            return {
+                'request': function(config) {
+                    config.headers = config.headers || {};
+                    if ($window.localStorage.satellizer_token) {
+                        config.headers.Authorization = 'Bearer ' + $window.localStorage.satellizer_token;
+                    }
+                    return config;
+                },
+                'responseError': function(response) {
+                    if (response.status === 401 || response.status === 403 || response.status === 400) {
+                        delete $window.localStorage.satellizer_token;
+                        $rootScope.authenticated = false;
+                        $location.path('/login');
+                    }
+                    return $q.reject(response);
+                }
+            };
+        });
+    })
+    .run(function($rootScope, $auth, $location, $route) {
+        $rootScope.$on('$locationChangeStart', function () {
+            if ($rootScope.authenticated === undefined) {
+                var token = localStorage.getItem('satellizer_token');
+                if (token) {
+                    $rootScope.authenticated = true;
+                    $route.reload();
+                } else {
+                    $rootScope.authenticated = false;
+                    $location.path('/login');
+                }
+            }
+        });
     })
    
 

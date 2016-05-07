@@ -14,6 +14,11 @@ body {
     z-index: 1;
 }
 
+.navbar-default .badge {
+    background-color: #fff;
+    color: #B71C1C;
+}
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
