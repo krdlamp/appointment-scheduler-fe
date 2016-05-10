@@ -7,9 +7,15 @@
     "description":"Re-scheduled"
   }, {
     "id":3,
-    "description":"Deferred"
+    "description":"Approved"
   }, {
     "id":4,
+    "description":"Deferred"
+  }, {
+    "id":5,
     "description":"Cancelled"
+  }, {
+    "id":6,
+    "description":"Not available"
   }]
 }

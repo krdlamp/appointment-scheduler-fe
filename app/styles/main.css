@@ -19,6 +19,10 @@ body {
     color: #B71C1C;
 }
 
+.btn-confirm {
+    margin-bottom: 3px;
+}
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,

@@ -32,8 +32,8 @@ angular
         $httpProvider.defaults.paramSerializer = '$httpParamSerializerJQLike';
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
         $authProvider.loginUrl = Config.apiBase + '/authenticate';
-        $authProvider.httpInterceptor = false;
-        FlashProvider.setTimeout(5000);
+        $authProvider.httpInterceptor = true;
+        // $authProvider.httpInterceptor = false;
         FlashProvider.setShowClose(true);
 
             $routeProvider
@@ -70,24 +70,30 @@ angular
                 })
                 .when('/scheduler/appointments', {
                     templateUrl: 'views/appointments.html',
-                    controller: 'AppointmentCtrl',
+                    controller: 'AppointmentListCtrl',
+                })
+                .when('/scheduler/appointments/my-appointments', {
+                    templateUrl: 'views/myappointments.html',
+                    controller: 'AppointmentInvitationsCtrl'
                 })
                 .otherwise({
                     redirectTo: '/',
                 })
 
-        $httpProvider.interceptors.push(function($q, $rootScope, $location, $localStorage, $window) {
+        $httpProvider.interceptors.push(function(Flash, $q, $rootScope, $location, $localStorage, $window) {
             return {
                 'request': function(config) {
                     config.headers = config.headers || {};
-                    if ($window.localStorage.satellizer_token) {
-                        config.headers.Authorization = 'Bearer ' + $window.localStorage.satellizer_token;
+                    var token = localStorage.getItem('satellizer_token');
+                    if (token) {
+                        config.headers.Authorization = 'Bearer ' + token;
                     }
                     return config;
                 },
                 'responseError': function(response) {
                     if (response.status === 401 || response.status === 403 || response.status === 400) {
-                        delete $window.localStorage.satellizer_token;
+                        localStorage.removeItem('satellizer_token');
+                        localStorage.removeItem('user');
                         $rootScope.authenticated = false;
                         $location.path('/login');
                     }

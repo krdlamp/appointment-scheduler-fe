@@ -53,6 +53,21 @@ angular.module('scheduler')
                        venue:      appointment.venue,
                    }
                }) 
+            },
+            confirmAttendance: function (data) {
+                return $http({
+                    method: 'PUT',
+                    url: baseUrl + '/' + data.appointment_id + '/confirm-attendance',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: 'Bearer' + $auth.getToken()
+                    },
+                    data: {
+                        appointment_id: data.appointment_id,
+                        employee_id   : data.employee_id,
+                        status        : data.status,
+                    }
+                });
             }
         }
     });

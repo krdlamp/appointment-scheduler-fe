@@ -1,15 +1,35 @@
 <div class="container">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <div class="panel-title">
-                <!-- Scheduled Date -->
+    <div class="col-sm-6">
+        <h3>Today's Schedule, {{ currentDate | date : 'MMMM d, yyyy' }}</h3>
+        <div class="panel panel-default" ng-repeat="present in presentAppointments">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    {{ formatTime(present.start_time) | date : 'HH:mm a' : 'UTC+08:00' }} - {{ formatTime(present.end_time) | date : 'HH:mm a' : 'UTC+08:00' }}
+                </div>
+            </div>
+            <div class="panel-body">
+                <p><label>Subject:</label> {{ present.subject }}</p>
+                <p><label>Venue:</label> {{ present.venue }}</p>
+                <p ng-init="getEmp(present.employee_id)"><label>Set by:</label> {{ set_by.first_name }} {{ set_by.last_name }}</p>
+                <p><a href="#/scheduler/appointment/{{present.id}}/details">See Details >></a></p>
             </div>
         </div>
-        <div class="panel-body">
-            <label>Subject:</label>
-            <label>Time:</label>
-            <label>Venue:</label>
-            <a href="">Details</a>
+    </div>
+    <div class="col-sm-6">
+        <h3>Scheduled Appointments</h3>
+        <div class="panel panel-default" ng-repeat="appointment in appointments">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    {{ appointment.set_date | date : 'MMMM d, yyyy' }}
+                </div>
+            </div>
+            <div class="panel-body">
+                <p><label>Subject:</label> {{ appointment.subject }}</p>
+                <p><label>Time:</label> {{ formatTime(appointment.start_time) | date : 'HH:mm a' : 'UTC+08:00' }} - {{ formatTime(appointment.end_time) | date : 'HH:mm a' : 'UTC+08:00' }}</p>
+                <p><label>Venue:</label> {{ appointment.venue }}</p>
+                <p ng-init="getEmp(appointment.employee_id)"><label>Set by:</label> {{ set_by.first_name }} {{ set_by.last_name }}</p>
+                <p><a href="#/scheduler/appointment/{{appointment.id}}/details">See Details >></a></p>
+            </div>
         </div>
     </div>
 </div>
