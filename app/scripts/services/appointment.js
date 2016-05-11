@@ -3,6 +3,7 @@
 angular.module('scheduler')
     .service('Appointment', function (Config, $http, $auth) {
         var baseUrl = Config.apiBase + '/appointments';
+        var statusBaseUrl = Config.apiBase + '/appointment-status';
         return {
             all: function () {
                 return $http.get(baseUrl);
@@ -57,7 +58,7 @@ angular.module('scheduler')
             confirmAttendance: function (data) {
                 return $http({
                     method: 'PUT',
-                    url: baseUrl + '/' + data.appointment_id + '/confirm-attendance',
+                    url: statusBaseUrl + '/' + data.appointment_id,
                     headers: {
                         'Content-Type': 'application/json',
                         Authorization: 'Bearer' + $auth.getToken()

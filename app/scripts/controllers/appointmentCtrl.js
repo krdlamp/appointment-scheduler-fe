@@ -98,7 +98,7 @@ angular.module('scheduler')
             var data = [];
 
             data.subject     = $scope.subject;
-            data.employees   = $scope.selectedEmps.push($scope.user);
+            data.employees   = $scope.selectedEmps.concat($scope.user);
             data.set_date    = $filter('date')($scope.set_date, 'yyyy-MM-dd', 'UTC+08:00');
             data.start_time  = $filter('date')($scope.start_time, 'hh:mm a', 'UTC+08:00');
             data.end_time    = $filter('date')($scope.end_time, 'hh:mm a', 'UTC+08:00');

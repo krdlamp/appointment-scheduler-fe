@@ -39,7 +39,7 @@ angular.module('scheduler')
             var data = [];
 
             data.appointment_id = appointment.id;
-            data.employee_id    = appointment.employee_id;
+            data.employee_id    = currentUser.id;
             data.status         = 'Attendance Confirmed';
 
             Appointment.confirmAttendance(data).then(function () {
