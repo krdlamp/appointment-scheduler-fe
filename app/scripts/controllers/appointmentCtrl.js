@@ -65,7 +65,7 @@ angular.module('scheduler')
         $scope.agendas = [];
 
         $scope.animationsEnabled = true;
-        
+
         $scope.syncEmps = function() {
             var selectedEmps = JSON.stringify($scope.selectedEmps);
             localStorage.setItem('selectedEmps', selectedEmps);
@@ -97,16 +97,17 @@ angular.module('scheduler')
         $scope.schedule = function() {
             var data = [];
 
-            data.subject     = $scope.subject;
-            data.employees   = $scope.selectedEmps.concat($scope.user);
-            data.set_date    = $filter('date')($scope.set_date, 'yyyy-MM-dd', 'UTC+08:00');
-            data.start_time  = $filter('date')($scope.start_time, 'hh:mm a', 'UTC+08:00');
-            data.end_time    = $filter('date')($scope.end_time, 'hh:mm a', 'UTC+08:00');
-            data.set_by      = $scope.user.id;
-            data.purpose     = $scope.purpose;
-            data.agendas     = $scope.agendas;
-            data.status      = 'Scheduled';
-            data.venue       = $scope.venue;
+            data.subject           = $scope.subject;
+            data.employees         = $scope.selectedEmps.concat($scope.user);
+            data.set_date          = $filter('date')($scope.set_date, 'yyyy-MM-dd', 'UTC+08:00');
+            data.start_time        = $filter('date')($scope.start_time, 'hh:mm a', 'UTC+08:00');
+            data.end_time          = $filter('date')($scope.end_time, 'hh:mm a', 'UTC+08:00');
+            data.set_by            = $scope.user.id;
+            data.purpose           = $scope.purpose;
+            data.agendas           = $scope.agendas;
+            data.status            = 'Scheduled';
+            data.invitation_status = 'Pending';
+            data.venue             = $scope.venue;
 
             if ($scope.appointments.length > 0) {
                 var conflicts = [];

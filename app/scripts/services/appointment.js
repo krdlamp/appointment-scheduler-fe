@@ -20,16 +20,17 @@ angular.module('scheduler')
                         Authorization: 'Bearer ' + $auth.getToken()
                     },
                     data: {
-                        subject:    appointment.subject,
-                        set_date:   appointment.set_date,
-                        start_time: appointment.start_time,
-                        end_time:   appointment.end_time,
-                        set_by:     appointment.set_by,
-                        purpose:    appointment.purpose,
-                        employees:  appointment.employees,
-                        agendas:    appointment.agendas,
-                        status:     appointment.status,
-                        venue:      appointment.venue,
+                        subject           : appointment.subject,
+                        set_date          : appointment.set_date,
+                        start_time        : appointment.start_time,
+                        end_time          : appointment.end_time,
+                        set_by            : appointment.set_by,
+                        purpose           : appointment.purpose,
+                        employees         : appointment.employees,
+                        agendas           : appointment.agendas,
+                        status            : appointment.status,
+                        invitation_status : appointment.invitation_status,
+                        venue             : appointment.venue,
                     }
                 })
             },
@@ -42,18 +43,19 @@ angular.module('scheduler')
                        Authorization: 'Bearer' + $auth.getToken()
                    },
                    data: {
-                       subject:    appointment.subject,
-                       set_date:   appointment.set_date,
-                       start_time: appointment.start_time,
-                       end_time:   appointment.end_time,
-                       set_by:     appointment.set_by,
-                       purpose:    appointment.purpose,
-                       employees:  appointment.employees,
-                       agendas:    appointment.agendas,
-                       status:     appointment.status,
-                       venue:      appointment.venue,
+                     subject           : appointment.subject,
+                     set_date          : appointment.set_date,
+                     start_time        : appointment.start_time,
+                     end_time          : appointment.end_time,
+                     set_by            : appointment.set_by,
+                     purpose           : appointment.purpose,
+                     employees         : appointment.employees,
+                     agendas           : appointment.agendas,
+                     status            : appointment.status,
+                     invitation_status : appointment.invitation_status,
+                     venue             : appointment.venue,
                    }
-               }) 
+               })
             },
             confirmAttendance: function (data) {
                 return $http({

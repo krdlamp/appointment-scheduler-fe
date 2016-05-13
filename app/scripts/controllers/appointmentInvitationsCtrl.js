@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('scheduler')
-    .controller('AppointmentInvitationsCtrl', function($scope, Appointment, Employee) {
+    .controller('AppointmentInvitationsCtrl', function($scope, Appointment, Employee, $location) {
 
         var currentUser = JSON.parse(window.localStorage.getItem('user'));
 
@@ -12,7 +12,7 @@ angular.module('scheduler')
             var timeTokens = time.split(':');
             return new Date(1970,0,1, timeTokens[0], timeTokens[1], timeTokens[2]);
         }
-        
+
         $scope.getEmp = function(emp_id) {
             Employee.all().then(function (resp) {
                 var emps = resp.data;
@@ -43,7 +43,7 @@ angular.module('scheduler')
             data.status         = 'Attendance Confirmed';
 
             Appointment.confirmAttendance(data).then(function () {
-                location.path('/scheduler/appointments/my-appointments');
+                $location.path('/scheduler/appointments/my-appointments');
             })
         }
     })

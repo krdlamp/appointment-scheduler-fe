@@ -66,7 +66,6 @@ angular
                 .when('/scheduler/appointment/:apptId/edit', {
                     templateUrl: 'views/editAppointment.html',
                     controller: 'AppointmentDetailsCtrl',
-                    controllerAs: 'appointment-details',
                 })
                 .when('/scheduler/appointments', {
                     templateUrl: 'views/appointments.html',
@@ -116,6 +115,3 @@ angular
             }
         });
     })
-   
-
-

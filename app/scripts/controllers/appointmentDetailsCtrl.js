@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('scheduler')
-    .controller('AppointmentDetailsCtrl', function(Appointment, Flash, Employee, $rootScope, $scope, $routeParams, $filter, $uibModal, $location) {
+    .controller('AppointmentDetailsCtrl', function(Appointment, Flash, Employee, Department, $rootScope, $scope, $routeParams, $filter, $uibModal, $location) {
         if (!$rootScope.authenticated) {
             $location.path('/login');
         }
-        
+
         Appointment.all().then(function(resp) {
             $scope.appointments = resp.data;
         });
@@ -39,9 +39,7 @@ angular.module('scheduler')
         localStorage.setItem('agendas', agendas);
         $scope.agendas = JSON.parse(window.localStorage.getItem('agendas'));
 
-        $scope.departments = $scope.appointment.departments;
-        $scope.employees = $scope.appointment.employees;
-        
+
         var selectedEmps = JSON.stringify($scope.appointment.employees);
         localStorage.setItem('selectedEmps', selectedEmps);
         $scope.selectedEmps = JSON.parse(window.localStorage.getItem('selectedEmps'));
@@ -97,14 +95,17 @@ angular.module('scheduler')
 
             data.id          = $scope.appointment.id;
             data.subject     = $scope.appointment.subject;
-            data.employees   = $scope.selectedEmps;
+            data.employees   = $scope.selectedEmps.concat($scope.user);
             data.set_date    = $filter('date')($scope.formattedDate, 'yyyy-MM-dd', 'UTC+08:00');
             data.start_time  = $filter('date')($scope.formattedStartTime, 'HH:mm a', 'UTC+08:00');
             data.end_time    = $filter('date')($scope.formattedEndTime, 'HH:mm a', 'UTC+08:00');
             data.set_by      = $scope.appointment.employee_id;
             data.purpose     = $scope.appointment.purpose;
             data.agendas     = $scope.agendas;
-            data.venue       = $scope.venue;
+            data.venue       = $scope.appointment.venue;
+            data.invitation_status = 'Pending';
+
+            console.log(data.employees);
 
             if ($scope.appointments.length > 0) {
                 var conflicts = [];
@@ -157,5 +158,5 @@ angular.module('scheduler')
             }
         }
     })
-    
+
 });
