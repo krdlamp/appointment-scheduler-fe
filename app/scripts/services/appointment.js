@@ -57,20 +57,20 @@ angular.module('scheduler')
                    }
                })
             },
-            confirmAttendance: function (data) {
-                return $http({
-                    method: 'PUT',
-                    url: statusBaseUrl + '/' + data.appointment_id,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: 'Bearer' + $auth.getToken()
-                    },
-                    data: {
-                        appointment_id: data.appointment_id,
-                        employee_id   : data.employee_id,
-                        status        : data.status,
-                    }
-                });
-            }
+            // confirmAttendance: function (data) {
+            //     return $http({
+            //         method: 'PUT',
+            //         url: statusBaseUrl + '/' + data.appointment_id,
+            //         headers: {
+            //             'Content-Type': 'application/json',
+            //             Authorization: 'Bearer' + $auth.getToken()
+            //         },
+            //         data: {
+            //             appointment_id: data.appointment_id,
+            //             employee_id   : data.employee_id,
+            //             status        : data.status,
+            //         }
+            //     });
+            // }
         }
     });

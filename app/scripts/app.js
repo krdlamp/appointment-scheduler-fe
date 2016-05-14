@@ -75,6 +75,18 @@ angular
                     templateUrl: 'views/myappointments.html',
                     controller: 'AppointmentInvitationsCtrl'
                 })
+                .when('/scheduler/appointments/my-appointments/pending', {
+                  templateUrl: 'views/pendingAppointments.html',
+                  controller: 'AppointmentInvitationsCtrl'
+                })
+                .when('/scheduler/appointments/my-appointments/approved', {
+                  templateUrl: 'views/approvedAppointments.html',
+                  controller: 'AppointmentInvitationsCtrl'
+                })
+                .when('/scheduler/appointments/my-appointments/cancelled', {
+                  templateUrl: 'views/cancelledAppointments.html',
+                  controller: 'AppointmentInvitationsCtrl'
+                })
                 .otherwise({
                     redirectTo: '/',
                 })

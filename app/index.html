@@ -47,7 +47,15 @@
             <li><a href="#/scheduler/appointments">Appointment List</a></li>
             <li><a href="#/scheduler/appointments/history">History</a></li>
             <li><a ng-href="#/scheduler">Set Appointment</a></li>
-            <li><a href="#/scheduler/appointments/my-appointments">My Appointments <span class="badge">5</span> </a></li>
+            <li class="dropdown" ng-if="authenticated === true">
+              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Appointments <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                  <li><a href="#/scheduler/appointments/my-appointments/pending">Pending <span class="badge"></span> </a></li>
+                  <li><a href="#/scheduler/appointments/my-appointments/approved">Approved <span class="badge"></span> </a></li>
+                  <li><a href="#/scheduler/appointments/my-appointments/cancelled">Cancelled <span class="badge"></span> </a></li>
+              </ul>
+            </li>
+            <!-- <li><a href="#/scheduler/appointments/my-appointments">My Appointments <span class="badge">5</span> </a></li> -->
             <li><a href="#/">Notifications <span class="badge">5</span> </a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -132,6 +140,8 @@
         <script src="scripts/services/employee.js"></script>
         <script src="scripts/services/department.js"></script>
         <script src="scripts/services/appointment.js"></script>
+        <script src="scripts/services/appointmentStatus.js"></script>
+        <script src="scripts/services/personnelAppointment.js"></script>
         <!-- endbuild -->
 </body>
 </html>

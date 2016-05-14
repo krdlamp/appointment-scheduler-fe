@@ -22,18 +22,19 @@ angular.module('scheduler')
 
         $scope.appointment = resp.data;
         $scope.formattedDate = new Date(resp.data.set_date);
+
         $scope.formattedStartTime = formatTime(resp.data.start_time);
-        $scope.formattedEndTime = formatTime(resp.data.end_time);
+        $scope.formattedEndTime   = formatTime(resp.data.end_time);
 
         console.log($scope.appointment.venue);
 
-        var oldDate = $filter('date')(resp.data.set_date, 'MMMM d, yyyy');
+        var oldDate      = $filter('date')(resp.data.set_date, 'MMMM d, yyyy');
         var oldStartTime = $filter('date')($scope.formattedStartTime, 'HH:mm a');
-        var oldEndTime = $filter('date')($scope.formattedEndTime, 'HH:mm a');
+        var oldEndTime   = $filter('date')($scope.formattedEndTime, 'HH:mm a');
 
-        $scope.date = $filter('date')($scope.formattedDate, 'MMMM d, yyyy', 'UTC+08:00');
+        $scope.date  = $filter('date')($scope.formattedDate, 'MMMM d, yyyy', 'UTC+08:00');
         $scope.start = $filter('date')($scope.formattedStartTime, 'HH:mm a', 'UTC+08:00');
-        $scope.end = $filter('date')($scope.formattedEndTime, 'HH:mm a', 'UTC+08:00');
+        $scope.end   = $filter('date')($scope.formattedEndTime, 'HH:mm a', 'UTC+08:00');
 
         var agendas = JSON.stringify($scope.appointment.agendas);
         localStorage.setItem('agendas', agendas);
@@ -116,9 +117,9 @@ angular.module('scheduler')
                             return new Date(1970,0,1, timeTokens[0], timeTokens[1], timeTokens[2]);
                         }
                         var formatted_start_time = formatTime(value.start_time);
-                        var value_start_time     = $filter('date')(formatted_start_time, 'HH:mm a', 'UTC+08:00');
                         var formatted_end_time   = formatTime(value.end_time);
-                        var value_end_time       = $filter('date')(formatted_end_time, 'HH:mm a', 'UTC+08:00');
+                        var value_start_time = $filter('date')(formatted_start_time, 'HH:mm a', 'UTC+08:00');
+                        var value_end_time   = $filter('date')(formatted_end_time, 'HH:mm a', 'UTC+08:00');
                         if ((value_start_time === data.start_time) && (value.id != data.id)) {
                             conflicts.push(value);
                         }

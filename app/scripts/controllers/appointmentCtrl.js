@@ -43,18 +43,19 @@ angular.module('scheduler')
         // Get all appointments
         Appointment.all().then(function (resp) {
             var appointments = resp.data;
+            $scope.appointments = [];
             $scope.appointments = appointments;
             $scope.events = [];
             angular.forEach(appointments, function (value) {
                 var meeting = {
-                    title: value.subject,
-                    date: value.set_date,
-                    start: value.set_date + ' ' + value.start_time,
-                    start_time: value.start_time,
-                    end_time: value.end_time,
-                    purpose: value.purpose,
-                    url: '#/scheduler/appointment/' + value.id + '/details',
-                    allDay: false
+                    title      : value.subject,
+                    date       : value.set_date,
+                    start      : value.set_date + ' ' + value.start_time,
+                    start_time : value.start_time,
+                    end_time   : value.end_time,
+                    purpose    : value.purpose,
+                    url        : '#/scheduler/appointment/' + value.id + '/details',
+                    allDay     : false
                 }
                 $scope.events.push(meeting);
             });
@@ -118,8 +119,8 @@ angular.module('scheduler')
                             return new Date(1970,0,1, timeTokens[0], timeTokens[1], timeTokens[2]);
                         }
                         var formatted_start_time = formatTime(value.start_time);
-                        var value_start_time = $filter('date')(formatted_start_time, 'hh:mm a', 'UTC+08:00');
                         var formatted_end_time = formatTime(value.end_time);
+                        var value_start_time = $filter('date')(formatted_start_time, 'hh:mm a', 'UTC+08:00');
                         var value_end_time = $filter('date')(formatted_end_time, 'hh:mm a', 'UTC+08:00');
                         if (value_start_time === data.start_time) {
                             conflicts.push(value);
