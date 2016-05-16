@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('scheduler')
-    .controller('AppointmentDetailsCtrl', function(Appointment, Flash, Employee, Department, $rootScope, $scope, $routeParams, $filter, $uibModal, $location) {
+    .controller('AppointmentDetailsCtrl', function(Appointment, Flash, Employee, PersonnelAppointment, Department, $rootScope, $scope, $routeParams, $filter, $uibModal, $location) {
         if (!$rootScope.authenticated) {
             $location.path('/login');
         }
@@ -18,15 +18,13 @@ angular.module('scheduler')
         var formatTime = function (time) {
             var timeTokens = time.split(':');
             return new Date(1970,0,1, timeTokens[0], timeTokens[1], timeTokens[2]);
-        }
+        };
 
         $scope.appointment = resp.data;
         $scope.formattedDate = new Date(resp.data.set_date);
 
         $scope.formattedStartTime = formatTime(resp.data.start_time);
         $scope.formattedEndTime   = formatTime(resp.data.end_time);
-
-        console.log($scope.appointment.venue);
 
         var oldDate      = $filter('date')(resp.data.set_date, 'MMMM d, yyyy');
         var oldStartTime = $filter('date')($scope.formattedStartTime, 'HH:mm a');
@@ -59,6 +57,32 @@ angular.module('scheduler')
             // });
         });
 
+        $scope.emp_stats = [];
+
+        angular.forEach($scope.appointment.employees, function(value) {
+          var emp = value;
+          PersonnelAppointment.getEmpAppointment(emp.id).then(function(resp) {
+            var appts = resp.data;
+            angular.forEach(appts, function(value) {
+              var status;
+              if($scope.appointment.employee.id === value.pivot.employee_id) {
+                status = "Attendance Confirmed";
+              } else {
+                if(value.pivot.status === "") {
+                  status = "Pending Approval";
+                } else {
+                  status = value.pivot.status;
+                }
+              }
+              if(value.pivot.appointment_id === $scope.appointment.id) {
+                var employee_status = {first_name:emp.first_name, last_name:emp.last_name, status:status};
+                $scope.emp_stats.push(employee_status);
+                console.log($scope.emp_stats);
+              }
+            });
+          });
+        });
+
         // Initialize agendas to an empty array
 
         $scope.animationsEnabled = true;
@@ -67,7 +91,7 @@ angular.module('scheduler')
             var selectedEmps = JSON.stringify($scope.selectedEmps);
             localStorage.setItem('selectedEmps', selectedEmps);
             $scope.selectedEmps = JSON.parse(window.localStorage.getItem('selectedEmps'));
-        }
+        };
 
         // var id = 1;
 
@@ -76,11 +100,11 @@ angular.module('scheduler')
             $scope.agenda = {
                 // 'id': id++,
                 'description': description
-            }
+            };
             var agendas = JSON.stringify($scope.agendas.concat($scope.agenda));
             localStorage.setItem('agendas', agendas);
             $scope.agendas = JSON.parse(window.localStorage.getItem('agendas'));
-        }
+        };
 
         $scope.removeAgenda = function(index) {
             var agendas = JSON.parse(window.localStorage.getItem('agendas'));
@@ -88,7 +112,7 @@ angular.module('scheduler')
             agendas = JSON.stringify(agendas);
             localStorage.setItem('agendas', agendas);
             $scope.agendas = JSON.parse(window.localStorage.getItem('agendas'));
-        }
+        };
 
         // Set appointment
         $scope.update = function() {
@@ -115,12 +139,12 @@ angular.module('scheduler')
                         var formatTime = function (time) {
                             var timeTokens = time.split(':');
                             return new Date(1970,0,1, timeTokens[0], timeTokens[1], timeTokens[2]);
-                        }
+                        };
                         var formatted_start_time = formatTime(value.start_time);
                         var formatted_end_time   = formatTime(value.end_time);
                         var value_start_time = $filter('date')(formatted_start_time, 'HH:mm a', 'UTC+08:00');
                         var value_end_time   = $filter('date')(formatted_end_time, 'HH:mm a', 'UTC+08:00');
-                        if ((value_start_time === data.start_time) && (value.id != data.id)) {
+                        if ((value_start_time === data.start_time) && (value.id !== data.id)) {
                             conflicts.push(value);
                         }
                         if ((data.start_time < value_end_time) && (value_start_time < data.start_time)) {
@@ -136,7 +160,7 @@ angular.module('scheduler')
                     Flash.create('danger', message, 0, true);
                     console.log('Time not available');
                 } else {
-                    if ((oldStartTime != data.start_time) || (oldEndTime != data.end_time) || (oldDate != data.set_date)) {
+                    if ((oldStartTime !== data.start_time) || (oldEndTime !== data.end_time) || (oldDate !== data.set_date)) {
                         data.status  = 'Re-Scheduled';
                     } else {
                         data.status = 'Scheduled';
@@ -147,7 +171,7 @@ angular.module('scheduler')
                     });
                 }
             } else {
-                if ((oldStartTime != data.start_time) || (oldEndTime != data.end_time) || (oldDate != data.set_date)) {
+                if ((oldStartTime !== data.start_time) || (oldEndTime !== data.end_time) || (oldDate !== data.set_date)) {
                     data.status  = 'Re-Scheduled';
                 } else {
                     data.status = 'Scheduled';
@@ -157,7 +181,6 @@ angular.module('scheduler')
                     $location.path('/scheduler/appointment/' + $scope.appointment.id + '/details');
                 });
             }
-        }
-    })
-
+        };
+    });
 });

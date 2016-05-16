@@ -1,30 +1,34 @@
 'use strict';
 
 angular.module('scheduler')
-    .controller('AppointmentListCtrl', function ($scope, $filter, $rootScope, Appointment, Employee) {
+    .controller('AppointmentListCtrl', function ($scope, $filter, $location, $rootScope, Appointment) {
         if (!$rootScope.authenticated) {
-            location.path('/login');
+            $location.path('/login');
         }
-        
-        $scope.currentDate = new Date;
+
+        $scope.currentDate = new Date();
+        $scope.appointments = [];
 
         $scope.formatTime = function (time) {
             var timeTokens = time.split(':');
             return new Date(1970,0,1, timeTokens[0], timeTokens[1], timeTokens[2]);
-        }
-
-        $scope.getEmp = function(emp_id) {
-            Employee.all().then(function (resp) {
-                var emps = resp.data;
-                angular.forEach(emps, function (value) {
-                    if (value.id === emp_id) {
-                        $scope.set_by = value;
-                    }
-                });
-            });
-        }
+        };
 
         Appointment.all().then(function (resp) {
-            $scope.appointments = resp.data;
-        })
-    })
+            var appointments = resp.data;
+            angular.forEach(appointments, function(value) {
+              var trues = [];
+              var appointment = value;
+              var emps = appointment.employees;
+              angular.forEach(appointment.employees, function(value) {
+                // if(value.pivot.status === "Attendance Confirmed") {
+                if((value.pivot.status === "Attendance Confirmed") || ((value.pivot.status === "") && (value.employeeId === value.pivot.employee_id))) {
+                  trues.push(value);
+                }
+              });
+              if(emps.length === trues.length + 1) {
+                $scope.appointments.push(appointment);
+              }
+            });
+        });
+    });

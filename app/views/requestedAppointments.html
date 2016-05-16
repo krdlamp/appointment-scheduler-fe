@@ -1,0 +1,21 @@
+<div class="container">
+  <h3>Requested Appointments</h3>
+  <p ng-if="requestsCount <= 0"><i>No appointment requests.</i></p>
+    <div class="col-sm-4" ng-repeat="request in requests">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    {{ request.set_date | date : 'MMMM d, yyyy' }}
+                </div>
+            </div>
+            <div class="panel-body">
+                <p><label>Subject:</label> {{ request.subject }}</p>
+                <p><label>Time:</label> {{ formatTime(request.start_time) | date : 'HH:mm a' : 'UTC+08:00' }} - {{ formatTime(request.end_time) | date : 'HH:mm a' : 'UTC+08:00' }}</p>
+                <p><label>Venue:</label> {{ request.venue }}</p>
+                <p><label>Set by:</label> {{ request.employee.first_name }} {{ request.employee.last_name }}</p>
+                <p><a href="#/scheduler/appointment/{{request.id}}/details">See Details >></a></p>
+                <button class="btn btn-danger text-center col-xs-12 btn-confirm" ng-click="cancelAppointment(request)"><span class="fa fa-remove"></span> Cancel Appointment</button>
+            </div>
+        </div>
+    </div>
+</div>

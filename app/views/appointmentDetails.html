@@ -20,7 +20,7 @@
         </ul>
         <ul class="list-group">
             <li class="list-group-item"><label><span class="fa fa-group"></span> Meeting Personnel:</label></li>
-            <li class="list-group-item" ng-repeat="emp in appointment.employees">{{ emp.first_name }} {{ emp.last_name }}</li>
+            <li class="list-group-item" ng-repeat="emp_stat in emp_stats">{{ emp_stat.first_name }} {{ emp_stat.last_name }} <span class="pull-right"><span ng-if="emp_stat.status === 'Attendance Confirmed'" class="fa fa-check text-success"></span> {{ emp_stat.status }}</span></li>
         </ul>
         <ul class="list-group">
             <li class="list-group-item"><label><span class="fa fa-institution"></span> Departments:</label></li>

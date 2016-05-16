@@ -2,20 +2,20 @@
 
 angular.module('scheduler')
     .controller('AuthCtrl', function($auth, $route, $scope, $location, Config, $http, $rootScope) {
-        var baseUrl = Config.apiBase  + '/authenticate/user'
+        var baseUrl = Config.apiBase  + '/authenticate/user';
         $scope.loginData = {
             emp_num: '',
             password: ''
         };
 
         $scope.loginError = false;
-        $scope.loginErrorText;
+        // $scope.loginErrorText;
 
         $rootScope.login = function() {
             var credentials = {
                 emp_num: $scope.loginData.emp_num,
                 password: $scope.loginData.password
-            }
+            };
 
             $auth.login(credentials).then(function() {
 
@@ -45,7 +45,6 @@ angular.module('scheduler')
                     $rootScope.currentUser = response.data.user;
 
                     $location.path('/');
-                    window.alert('You are now logged in!');
                 });
 
             // Handle errors
@@ -54,7 +53,7 @@ angular.module('scheduler')
                 $scope.loginErrorText = error.data.error;
 
             });
-        }
+        };
     })
     .run(function ($rootScope, $auth, $location) {
         var user = JSON.parse(window.localStorage.getItem('user'));
@@ -70,7 +69,6 @@ angular.module('scheduler')
 
                 $rootScope.currentUser = null;
                 $location.path('/login');
-                window.alert('You are now logged out!');
-            })
-        }
-    })
+            });
+        };
+    });

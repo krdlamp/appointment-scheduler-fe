@@ -1,6 +1,7 @@
 <div class="container">
     <div class="col-sm-4">
         <h3>Pending Appointments</h3>
+        <p ng-if="pendingCount <= 0"><i>No pending appointments.</i></p>
         <div class="panel panel-default" ng-repeat="invitation in pendingInvitations">
             <div class="panel-heading">
                 <div class="panel-title">
@@ -11,7 +12,7 @@
                 <p><label>Subject:</label> {{ invitation.subject }}</p>
                 <p><label>Time:</label> {{ formatTime(invitation.start_time) | date : 'HH:mm a' : 'UTC+08:00' }} - {{ formatTime(invitation.end_time) | date : 'HH:mm a' : 'UTC+08:00' }}</p>
                 <p><label>Venue:</label> {{ invitation.venue }}</p>
-                <p ng-init="getEmp(invitation.employee_id)"><label>Set by:</label> {{ set_by.first_name }} {{ set_by.last_name }}</p>
+                <p><label>Set by:</label> {{ invitation.employee.first_name }} {{ invitation.employee.last_name }}</p>
                 <p><a href="#/scheduler/appointment/{{invitation.id}}/details">See Details >></a></p>
                 <button class="btn btn-primary text-center col-xs-12 btn-confirm" ng-click="confirmAttendance(invitation)"><span class="fa fa-check"></span> Confirm Attendance</button>
                 <button class="btn btn-warning text-center col-xs-12 btn-confirm"><span class="fa fa-remove"></span> Schedule Not Available</button>

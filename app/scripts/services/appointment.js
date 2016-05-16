@@ -3,7 +3,6 @@
 angular.module('scheduler')
     .service('Appointment', function (Config, $http, $auth) {
         var baseUrl = Config.apiBase + '/appointments';
-        var statusBaseUrl = Config.apiBase + '/appointment-status';
         return {
             all: function () {
                 return $http.get(baseUrl);
@@ -32,7 +31,7 @@ angular.module('scheduler')
                         invitation_status : appointment.invitation_status,
                         venue             : appointment.venue,
                     }
-                })
+                });
             },
             patch: function (appointment) {
                return $http({
@@ -55,7 +54,7 @@ angular.module('scheduler')
                      invitation_status : appointment.invitation_status,
                      venue             : appointment.venue,
                    }
-               })
+               });
             },
             // confirmAttendance: function (data) {
             //     return $http({
@@ -72,5 +71,5 @@ angular.module('scheduler')
             //         }
             //     });
             // }
-        }
+        };
     });

@@ -1,6 +1,10 @@
 <div class="container">
+  <div class="col-md-6">
+    <h3 class="text-center">Appointment Calendar</h3>
+    <div id="fullcalendar" ui-calendar="uiConfig.calendar" ng-model="eventSources"></div>
+  </div>
+  <div class="col-md-6">
     <h3 class="text-center">Schedule Appointment</h3>
-    <flash-message></flash-message>
     <form role="form">
         <div class="form-group">
             <label for="subject">Subject:</label>
@@ -55,8 +59,16 @@
                 </li>
             </ul>
         </div>
-        <button type="submit" class="btn btn-primary pull-right" ng-click="schedule()">Set Appointment</button>
+        <div class="row">
+          <div class="col-md-6">
+            <flash-message></flash-message>
+          </div>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary pull-right" ng-click="schedule()">Set Appointment</button>
+          </div>
+        </div>
         <br>
     </form>
+  </div>
     <br>
 </div>

@@ -34,7 +34,7 @@ angular
         $authProvider.loginUrl = Config.apiBase + '/authenticate';
         $authProvider.httpInterceptor = true;
         // $authProvider.httpInterceptor = false;
-        FlashProvider.setShowClose(true);
+        FlashProvider.setTimeout(5000);
 
             $routeProvider
                 .when('/', {
@@ -75,6 +75,10 @@ angular
                     templateUrl: 'views/myappointments.html',
                     controller: 'AppointmentInvitationsCtrl'
                 })
+                .when('/scheduler/appointments/my-appointments/scheduled', {
+                  templateUrl: 'views/scheduledAppointments.html',
+                  controller: 'AppointmentInvitationsCtrl'
+                })
                 .when('/scheduler/appointments/my-appointments/pending', {
                   templateUrl: 'views/pendingAppointments.html',
                   controller: 'AppointmentInvitationsCtrl'
@@ -83,15 +87,19 @@ angular
                   templateUrl: 'views/approvedAppointments.html',
                   controller: 'AppointmentInvitationsCtrl'
                 })
+                .when('/scheduler/appointments/my-appointments/requested', {
+                  templateUrl: 'views/requestedAppointments.html',
+                  controller: 'AppointmentInvitationsCtrl'
+                })
                 .when('/scheduler/appointments/my-appointments/cancelled', {
                   templateUrl: 'views/cancelledAppointments.html',
                   controller: 'AppointmentInvitationsCtrl'
                 })
                 .otherwise({
                     redirectTo: '/',
-                })
+                });
 
-        $httpProvider.interceptors.push(function(Flash, $q, $rootScope, $location, $localStorage, $window) {
+        $httpProvider.interceptors.push(function(Flash, $q, $rootScope, $location) {
             return {
                 'request': function(config) {
                     config.headers = config.headers || {};
@@ -126,4 +134,4 @@ angular
                 }
             }
         });
-    })
+    });

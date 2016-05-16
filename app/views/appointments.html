@@ -27,7 +27,7 @@
                 <p><label>Subject:</label> {{ appointment.subject }}</p>
                 <p><label>Time:</label> {{ formatTime(appointment.start_time) | date : 'HH:mm a' : 'UTC+08:00' }} - {{ formatTime(appointment.end_time) | date : 'HH:mm a' : 'UTC+08:00' }}</p>
                 <p><label>Venue:</label> {{ appointment.venue }}</p>
-                <p ng-init="getEmp(appointment.employee_id)"><label>Set by:</label> {{ set_by.first_name }} {{ set_by.last_name }}</p>
+                <p><label>Set by:</label> {{ appointment.employee.first_name }} {{ appointment.employee.last_name }}</p>
                 <p><a href="#/scheduler/appointment/{{appointment.id}}/details">See Details >></a></p>
             </div>
         </div>

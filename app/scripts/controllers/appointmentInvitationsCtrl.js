@@ -1,53 +1,79 @@
 'use strict';
 
 angular.module('scheduler')
-    .controller('AppointmentInvitationsCtrl', function($scope, Appointment, AppointmentStatus, PersonnelAppointment, Employee, $location) {
+    .controller('AppointmentInvitationsCtrl', function($scope, $rootScope, Appointment, AppointmentStatus, PersonnelAppointment, Employee, $location) {
+      if (!$rootScope.authenticated) {
+          $location.path('/login');
+      }
 
         var currentUser = JSON.parse(window.localStorage.getItem('user'));
 
-        $scope.invitations = [];
-        $scope.pendingInvitations = [];
-        $scope.approvedAppointments = [];
-        $scope.requests = [];
+        $scope.invitations           = [];
+        $scope.pendingInvitations    = [];
+        $scope.approvedAppointments  = [];
+        $scope.cancelledAppointments = [];
+        $scope.scheduledAppointments = [];
+        $scope.requests              = [];
 
         $scope.formatTime = function (time) {
             var timeTokens = time.split(':');
             return new Date(1970,0,1, timeTokens[0], timeTokens[1], timeTokens[2]);
-        }
-
-        $scope.getEmp = function(emp_id) {
-            Employee.all().then(function (resp) {
-                var emps = resp.data;
-                angular.forEach(emps, function (value) {
-                    if (value.id === emp_id) {
-                        $scope.set_by = value;
-                    }
-                });
-            });
-        }
+        };
 
         Appointment.all().then(function (resp) {
             var appointments = resp.data;
             angular.forEach(appointments, function (value) {
-                if(value.employee_id != currentUser.id) {
+                if(value.employee_id !== currentUser.id) {
                     $scope.invitations.push(value);
                 } else if (value.employee_id === currentUser.id) {
                     $scope.requests.push(value);
                 }
-            })
+            });
+            $scope.requestsCount  = $scope.requests.length;
         });
 
-        PersonnelAppointment.all().then(function(resp) {
+        PersonnelAppointment.getEmpAppointment(currentUser.id).then(function(resp) {
           var appointments = resp.data;
-          console.log(appointments);
           angular.forEach(appointments, function(value) {
-            if (value.pivot.status === "" && value.employee_id != currentUser.id) {
+            if (value.pivot.status === "" && value.employee_id !== currentUser.id) {
               $scope.pendingInvitations.push(value);
             } else if (value.pivot.status === "Attendance Confirmed") {
               $scope.approvedAppointments.push(value);
             }
-          })
+          });
+          $scope.pendingCount   = $scope.pendingInvitations.length;
+          $scope.approvedCount  = $scope.approvedAppointments.length;
         });
+
+        Appointment.all().then(function (resp) {
+            var allSched = [];
+            var appointments = resp.data;
+            angular.forEach(appointments, function(value) {
+              var trues = [];
+              var appointment = value;
+              var emps = appointment.employees;
+              angular.forEach(appointment.employees, function(value) {
+                // if(value.pivot.status === "Attendance Confirmed") {
+                if((value.pivot.status === "Attendance Confirmed") || ((value.pivot.status === "") && (value.employeeId === value.pivot.employee_id))) {
+                  trues.push(value);
+                }
+              });
+              if(emps.length === trues.length + 1) {
+                allSched.push(appointment);
+              }
+            });
+            angular.forEach(allSched, function(value) {
+              var appt = value;
+              angular.forEach(appt.employees, function(value) {
+                if(value.id === currentUser.id) {
+                  $scope.scheduledAppointments.push(appt);
+                }
+              });
+            });
+            $scope.scheduledCount = $scope.scheduledAppointments.length;
+        });
+
+        $scope.cancelledCount = $scope.cancelledAppointments.length;
 
         $scope.confirmAttendance = function(appointment) {
             var data = [];
@@ -58,6 +84,6 @@ angular.module('scheduler')
 
             AppointmentStatus.update(data).then(function () {
                 $location.path('/scheduler/appointments/my-appointments');
-            })
-        }
-    })
+            });
+        };
+    });

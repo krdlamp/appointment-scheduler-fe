@@ -7,5 +7,5 @@ angular.module('scheduler')
             all: function() {
                 return $http.get(baseUrl);
             }
-        }
+        };
     });

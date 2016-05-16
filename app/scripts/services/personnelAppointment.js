@@ -2,11 +2,17 @@
 
 angular.module('scheduler')
   .service('PersonnelAppointment', function(Config, $http, $auth) {
-    var currentUser = JSON.parse(window.localStorage.getItem('user'));
-    var baseUrl = Config.apiBase + '/personnel-appointments/' + currentUser.id;
+    var baseUrl = Config.apiBase + '/personnel-appointments';
     return {
-      all: function() {
-        return $http.get(baseUrl);
+      getEmpAppointment: function(id) {
+        return $http({
+          method: 'GET',
+          url: baseUrl + '/' + id,
+          headers: {
+              'Content-Type': 'application/json',
+              Authorization: 'Bearer' + $auth.getToken()
+          }
+        });
       }
-    }
-  })
+    };
+  });

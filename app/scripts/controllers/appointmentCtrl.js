@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('scheduler')
-    .controller('AppointmentCtrl', function($rootScope, $filter, $location, $route, $scope, Flash, Employee, Department, Appointment, Config, $uibModal) {
+    .controller('AppointmentCtrl', function($rootScope, $filter, $location, $route, $scope, Flash, Employee, Department, Appointment) {
         if (!$rootScope.authenticated) {
             $location.path('/login');
         }
@@ -9,7 +9,7 @@ angular.module('scheduler')
         // Configure calendar object
         $scope.uiConfig = {
             calendar:{
-                height: 800,
+                // height: 800,
                 editable: true,
                 header:{
                     left: 'month basicWeek basicDay agendaWeek agendaDay',
@@ -33,7 +33,7 @@ angular.module('scheduler')
             var employees = [];
             var emps = resp.data;
             angular.forEach(emps, function(value) {
-                if (value.id != $scope.user.id) {
+                if (value.id !== $scope.user.id) {
                     employees.push(value);
                 }
             });
@@ -56,7 +56,7 @@ angular.module('scheduler')
                     purpose    : value.purpose,
                     url        : '#/scheduler/appointment/' + value.id + '/details',
                     allDay     : false
-                }
+                };
                 $scope.events.push(meeting);
             });
             $scope.eventSources.push($scope.events);
@@ -71,7 +71,7 @@ angular.module('scheduler')
             var selectedEmps = JSON.stringify($scope.selectedEmps);
             localStorage.setItem('selectedEmps', selectedEmps);
             $scope.selectedEmps = JSON.parse(window.localStorage.getItem('selectedEmps'));
-        }
+        };
 
         // var id = 1;
 
@@ -80,11 +80,11 @@ angular.module('scheduler')
             $scope.agenda = {
                 // 'id': id++,
                 'description': description
-            }
+            };
             var agendas = JSON.stringify($scope.agendas.concat($scope.agenda));
             localStorage.setItem('agendas', agendas);
             $scope.agendas = JSON.parse(window.localStorage.getItem('agendas'));
-        }
+        };
 
         $scope.removeAgenda = function(index) {
             var agendas = JSON.parse(window.localStorage.getItem('agendas'));
@@ -92,7 +92,7 @@ angular.module('scheduler')
             agendas = JSON.stringify(agendas);
             localStorage.setItem('agendas', agendas);
             $scope.agendas = JSON.parse(window.localStorage.getItem('agendas'));
-        }
+        };
 
         // Set appointment
         $scope.schedule = function() {
@@ -117,29 +117,36 @@ angular.module('scheduler')
                         var formatTime = function (time) {
                             var timeTokens = time.split(':');
                             return new Date(1970,0,1, timeTokens[0], timeTokens[1], timeTokens[2]);
-                        }
+                        };
                         var formatted_start_time = formatTime(value.start_time);
-                        var formatted_end_time = formatTime(value.end_time);
-                        var value_start_time = $filter('date')(formatted_start_time, 'hh:mm a', 'UTC+08:00');
-                        var value_end_time = $filter('date')(formatted_end_time, 'hh:mm a', 'UTC+08:00');
+                        var formatted_end_time   = formatTime(value.end_time);
+                        var value_start_time     = $filter('date')(formatted_start_time, 'hh:mm a', 'UTC+08:00');
+                        var value_end_time       = $filter('date')(formatted_end_time, 'hh:mm a', 'UTC+08:00');
                         if (value_start_time === data.start_time) {
                             conflicts.push(value);
                         }
-                        if ((data.start_time < value_end_time) && (value_start_time < data.start_time)) {
+                        if ((data.start_time < value_end_time) && (data.start_time > value_start_time)) {
                             conflicts.push(value);
                         }
                         if ((data.end_time > value_start_time) && (data.end_time < value_end_time)) {
                             conflicts.push(value);
                         }
+                        if ((value_start_time > data.start_time) && (value_end_time < data.end_time)) {
+                          conflicts.push(value);
+                        }
+                        if ((data.start_time < value_start_time) && (data.end_time >= value_end_time)) {
+                          conflicts.push(value);
+                        }
                     }
                 });
+                console.log(conflicts.length);
                 if (conflicts.length > 0) {
                     var message = 'Warning: Time not available!';
-                    Flash.create('danger', message, 0, true);
+                    Flash.create('danger', message);
                     console.log('Time not available');
                 } else {
                     Appointment.create(data).then(function () {
-                        $location.path('/calendar');
+                        $route.reload();
                     });
                 }
             } else {
@@ -148,6 +155,6 @@ angular.module('scheduler')
                 });
             }
 
-        }
+        };
 
-    })
+    });
