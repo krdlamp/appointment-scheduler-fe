@@ -31,4 +31,17 @@
         </ul>
     </div>
     <a ng-if="appointment.employee_id === user.id" class="pull-right btn btn-primary" href="#/scheduler/appointment/{{appointment.id}}/edit"><span class="panel-title fa fa-edit"></span> Edit</a>
+    <div class="row" ng-if="isPending">
+      <div class="col-md-6">
+        <button class="btn btn-warning pull-left"><span class="fa fa-remove"></span> Schedule Not Available</button>
+      </div>
+      <div class="col-md-6">
+        <button class="btn btn-primary pull-right" ng-click="confirmAttendance(invitation)"><span class="fa fa-check"></span> Confirm Attendance</button>
+      </div>
+    </div>
+    <div class="row" ng-if="isApproved">
+      <div class="col-md-12">
+        <button class="btn btn-danger pull-right" ng-click="cancelAppointment(invitation)"><span class="fa fa-remove"></span> Cancel Appointment</button>
+      </div>
+    </div>
 </div>

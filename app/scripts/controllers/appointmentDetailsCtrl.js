@@ -77,7 +77,15 @@ angular.module('scheduler')
               if(value.pivot.appointment_id === $scope.appointment.id) {
                 var employee_status = {first_name:emp.first_name, last_name:emp.last_name, status:status};
                 $scope.emp_stats.push(employee_status);
-                console.log($scope.emp_stats);
+              }
+              if((value.employee_id !== user.id) && (value.pivot.employee_id === user.id) && (value.pivot.appointment_id === $scope.appointment.id)) {
+                if(value.pivot.status === "") {
+                  $scope.isPending = true;
+                  console.log($scope.isPending);
+                } else if(value.pivot.status === "Attendance Confirmed") {
+                  $scope.isApproved = true;
+                  console.log($scope.isApproved);
+                }
               }
             });
           });

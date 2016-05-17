@@ -118,23 +118,23 @@ angular.module('scheduler')
                             var timeTokens = time.split(':');
                             return new Date(1970,0,1, timeTokens[0], timeTokens[1], timeTokens[2]);
                         };
-                        var formatted_start_time = formatTime(value.start_time);
-                        var formatted_end_time   = formatTime(value.end_time);
-                        var value_start_time     = $filter('date')(formatted_start_time, 'hh:mm a', 'UTC+08:00');
-                        var value_end_time       = $filter('date')(formatted_end_time, 'hh:mm a', 'UTC+08:00');
-                        if (value_start_time === data.start_time) {
+                        var formattedStartTime = formatTime(value.start_time);
+                        var formattedEndTime   = formatTime(value.end_time);
+                        var valueStartTime     = $filter('date')(formattedStartTime, 'hh:mm a', 'UTC+08:00');
+                        var valueEndTime       = $filter('date')(formattedEndTime, 'hh:mm a', 'UTC+08:00');
+                        if (valueStartTime === data.start_time) {
                             conflicts.push(value);
                         }
-                        if ((data.start_time < value_end_time) && (data.start_time > value_start_time)) {
+                        if ((data.start_time < valueEndTime) && (data.start_time > valueStartTime)) {
                             conflicts.push(value);
                         }
-                        if ((data.end_time > value_start_time) && (data.end_time < value_end_time)) {
+                        if ((data.end_time > valueStartTime) && (data.end_time < valueEndTime)) {
                             conflicts.push(value);
                         }
-                        if ((value_start_time > data.start_time) && (value_end_time < data.end_time)) {
+                        if ((valueStartTime > data.start_time) && (valueEndTime < data.end_time)) {
                           conflicts.push(value);
                         }
-                        if ((data.start_time < value_start_time) && (data.end_time >= value_end_time)) {
+                        if ((data.start_time < valueStartTime) && (data.end_time >= valueEndTime)) {
                           conflicts.push(value);
                         }
                     }

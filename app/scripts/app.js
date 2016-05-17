@@ -32,6 +32,7 @@ angular
         $httpProvider.defaults.paramSerializer = '$httpParamSerializerJQLike';
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
         $authProvider.loginUrl = Config.apiBase + '/authenticate';
+        $authProvider.signupUrl = Config.apiBase + '/register';
         $authProvider.httpInterceptor = true;
         // $authProvider.httpInterceptor = false;
         FlashProvider.setTimeout(5000);
@@ -41,6 +42,10 @@ angular
                     templateUrl: 'views/calendar.html',
                     controller: 'AppointmentCtrl',
                     controllerAs: 'appointment',
+                })
+                .when('/register', {
+                  templateUrl: 'views/register.html',
+                  controller: 'RegistrationCtrl'
                 })
                 .when('/login', {
                     templateUrl: 'views/auth.html',

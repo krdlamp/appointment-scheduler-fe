@@ -12,7 +12,7 @@
                 <p><label>Subject:</label> {{ schedule.subject }}</p>
                 <p><label>Time:</label> {{ formatTime(schedule.start_time) | date : 'HH:mm a' : 'UTC+08:00' }} - {{ formatTime(schedule.end_time) | date : 'HH:mm a' : 'UTC+08:00' }}</p>
                 <p><label>Venue:</label> {{ schedule.venue }}</p>
-                <p><label>Set by:</label> {{ schedule.employee.first_name }} {{ schedule.employee.last_name }}</p>
+                <p ng-init="getEmp(schedule.employee_id)"><label>Set by:</label> {{ employee.first_name }} {{ employee.last_name }}</p>
                 <p><a href="#/scheduler/appointment/{{schedule.id}}/details">See Details >></a></p>
                 <button class="btn btn-danger text-center col-xs-12 btn-confirm" ng-click="cancelAppointment(schedule)"><span class="fa fa-remove"></span> Cancel Appointment</button>
             </div>

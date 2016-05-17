@@ -8,7 +8,6 @@ angular.module('scheduler')
 
         var currentUser = JSON.parse(window.localStorage.getItem('user'));
 
-        $scope.invitations           = [];
         $scope.pendingInvitations    = [];
         $scope.approvedAppointments  = [];
         $scope.cancelledAppointments = [];
@@ -23,9 +22,7 @@ angular.module('scheduler')
         Appointment.all().then(function (resp) {
             var appointments = resp.data;
             angular.forEach(appointments, function (value) {
-                if(value.employee_id !== currentUser.id) {
-                    $scope.invitations.push(value);
-                } else if (value.employee_id === currentUser.id) {
+                if (value.employee_id === currentUser.id) {
                     $scope.requests.push(value);
                 }
             });
@@ -35,10 +32,13 @@ angular.module('scheduler')
         PersonnelAppointment.getEmpAppointment(currentUser.id).then(function(resp) {
           var appointments = resp.data;
           angular.forEach(appointments, function(value) {
-            if (value.pivot.status === "" && value.employee_id !== currentUser.id) {
-              $scope.pendingInvitations.push(value);
-            } else if (value.pivot.status === "Attendance Confirmed") {
-              $scope.approvedAppointments.push(value);
+            console.log(value);
+            if (value.employee_id !== currentUser.id) {
+              if (value.pivot.status === "") {
+                $scope.pendingInvitations.push(value);
+              } else if (value.pivot.status === "Attendance Confirmed") {
+                $scope.approvedAppointments.push(value);
+              }
             }
           });
           $scope.pendingCount   = $scope.pendingInvitations.length;
@@ -72,6 +72,18 @@ angular.module('scheduler')
             });
             $scope.scheduledCount = $scope.scheduledAppointments.length;
         });
+
+
+        $scope.getEmp = function(empId) {
+          Employee.all().then(function (resp) {
+            var emps = resp.data;
+            angular.forEach(emps, function(value) {
+              if (value.id === empId) {
+                $scope.employee = value;
+              }
+            });
+          });
+        };
 
         $scope.cancelledCount = $scope.cancelledAppointments.length;
 
