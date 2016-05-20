@@ -1,40 +1,36 @@
 'use strict';
 
 angular.module('scheduler')
-  .controller('RegisterCtrl', function($route, $auth, $scope, Config, $http, $location) {
+  .controller('RegisterCtrl', function($route, $auth, $scope, $rootScope, Config, Flash, $http, $location) {
     var baseUrl = Config.apiBase + '/register';
 
-    $scope.register = __register() {
+    $scope.register = function() {
       $auth.signup({
         emp_num: $scope.user.emp_num,
         password: $scope.user.password
       }).then(function (response) {
-        console.log(response);
+
+        var token = JSON.stringify(response.data.token);
+        var user  = JSON.stringify(response.data.user);
+
+        localStorage.setItem('satellizer_token', token);
+        localStorage.setItem('user', user);
+
+        $rootScope.authenticated = true;
+
+        $rootScope.currentUser = localStorage.getItem('user');
+
         $location.path('/');
-      }).catch(function (response) {
-        console.log(response);
-        window.alert('Error: Registration failed');
+
+      }, function (response) {
+        var errorMessage;
+        if (response.status === 500) {
+          errorMessage = "Account already exists";
+        } else {
+          errorMessage = "Invalid employee number";
+        }
+        Flash.create('danger', errorMessage);
       });
   }
 
 })
-
-
-
-// .controller(‘RegisterCtrl’, function ($state, $auth) {
-//   var vm = this;
-//   vm.user = {};
-//   vm.register = function __register() {
-//     $auth.signup({
-//       name: vm.user.name,
-//       email: vm.user.email,
-//       password: vm.user.password
-//     }).then(function (response) {
-//       console.log(response);
-//       $state.go(‘dashboard’);
-//     }).catch(function (response) {
-//       console.log(response);
-//       window.alert(‘Error: Register failed’);
-//     });
-//   };
-// })

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('scheduler')
-    .controller('AuthCtrl', function($auth, $route, $scope, $location, Config, $http, $rootScope) {
+    .controller('AuthCtrl', function($auth, $route, $scope, $location, Config, Flash, $http, $rootScope) {
         var baseUrl = Config.apiBase  + '/authenticate/user';
         $scope.loginData = {
             emp_num: '',
@@ -49,9 +49,12 @@ angular.module('scheduler')
 
             // Handle errors
             }, function(error) {
-                $scope.loginError = true;
-                $scope.loginErrorText = error.data.error;
-
+                var loginErrorText = error.data.error;
+                var errorMessage;
+                if (loginErrorText === 'invalid_credentials') {
+                  errorMessage = 'Invalid Credentials'
+                }
+                Flash.create('danger', errorMessage);
             });
         };
     })
