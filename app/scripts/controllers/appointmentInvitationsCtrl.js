@@ -61,6 +61,9 @@ angular.module('scheduler')
               if(emps.length === trues.length + 1) {
                 allSched.push(appointment);
               }
+              if (appointment.status === "Cancelled") {
+                $scope.cancelledAppointments.push(appointment);
+              }
             });
             angular.forEach(allSched, function(value) {
               var appt = value;
@@ -71,6 +74,7 @@ angular.module('scheduler')
               });
             });
             $scope.scheduledCount = $scope.scheduledAppointments.length;
+            $scope.cancelledCount = $scope.cancelledAppointments.length;
         });
 
 
@@ -85,8 +89,6 @@ angular.module('scheduler')
           });
         };
 
-        $scope.cancelledCount = $scope.cancelledAppointments.length;
-
         $scope.confirmAttendance = function(appointment) {
             var data = [];
 
@@ -95,7 +97,59 @@ angular.module('scheduler')
             data.status         = 'Attendance Confirmed';
 
             AppointmentStatus.update(data).then(function () {
-                $location.path('/scheduler/appointments/my-appointments');
+                $location.path('/scheduler/appointments/my-appointments/approved');
             });
         };
-    });
+
+        $scope.notAvailable = function(appointment) {
+          var reason = window.prompt("Please state your reasons:");
+          var data = [];
+
+          data.appointment_id = appointment.id;
+          data.employee_id    = currentUser.id;
+          data.status         = 'Not Available';
+          data.notes          = reason;
+
+          AppointmentStatus.update(data).then(function() {
+            $location.path('/scheduler/appointments/my-appointments/pending');
+          });
+        };
+
+        $scope.cancelAppointment = function(appointment) {
+          var reason = window.prompt("Please state your reasons:");
+          var data = [];
+
+          data.id                 = appointment.id;
+          data.subject            = appointment.subject;
+          data.set_date           = appointment.set_date;
+          data.start_time         = appointment.start_time;
+          data.end_time           = appointment.end_time;
+          data.set_by             = appointment.employee_id;
+          data.purpose            = appointment.purpose;
+          data.employees          = appointment.employees;
+          data.agendas            = appointment.agendas;
+          data.status             = 'Cancelled';
+          data.invitation_status  = appointment.invitation_status;
+          data.venue              = appointment.venue;
+          data.notes              = appointment.notes;
+
+
+          //
+          // subject           : appointment.subject,
+          // set_date          : appointment.set_date,
+          // start_time        : appointment.start_time,
+          // end_time          : appointment.end_time,
+          // set_by : appointment.set_by,
+          // purpose           : appointment.purpose,
+          // employees         : appointment.employees,
+          // agendas           : appointment.agendas,
+          // status            : appointment.status,
+          // invitation_status : appointment.invitation_status,
+          // venue             : appointment.venue,
+          // notes             : appointment.notes,
+
+          Appointment.patch(data).then(function() {
+            $location.path('/scheduler/appointments/my-appointments/cancelled')
+          })
+        }
+    })

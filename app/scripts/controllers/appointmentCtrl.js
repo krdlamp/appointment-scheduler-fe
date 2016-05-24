@@ -34,7 +34,9 @@ angular.module('scheduler')
             var emps = resp.data;
             angular.forEach(emps, function(value) {
                 if (value.id !== $scope.user.id) {
+                  if ((value.level.id === '1') || (value.level.id === '2')) {
                     employees.push(value);
+                  }
                 }
             });
             $scope.employees = employees;
@@ -109,6 +111,7 @@ angular.module('scheduler')
             data.status            = 'Scheduled';
             data.invitation_status = 'Pending';
             data.venue             = $scope.venue;
+            data.notes             = $scope.notes;
 
             if ($scope.appointments.length > 0) {
                 var conflicts = [];

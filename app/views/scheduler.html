@@ -12,8 +12,8 @@
         </div>
         <div class="form-group">
             <label>Invite Personnel:</label>
-            <select class="form-control" placeholder="Select an Employee" name="multipleSelect" id="multipleSelect"
-                    ng-options="selectedEmp as selectedEmp.first_name for selectedEmp in employees track by selectedEmp.id"
+            <select  class="form-control" placeholder="Select an Employee" name="multipleSelect" id="multipleSelect"
+                    ng-options="selectedEmp as selectedEmp.first_name.concat(' ' + selectedEmp.last_name) for selectedEmp in employees track by selectedEmp.id"
                     ng-model="selectedEmps" ng-change="syncEmps()" options="{ allowClear: true }" multiple></select>
         </div>
         <div class="form-group">
@@ -58,6 +58,10 @@
                     {{ agenda.description }} <span style="cursor:pointer;" class="glyphicon glyphicon-remove pull-right text-danger" ng-click="removeAgenda($index)"></span>
                 </li>
             </ul>
+        </div>
+        <div class="form-group">
+            <label for="notes">Notes:</label>
+            <textarea type="text" class="form-control" id="notes" ng-model="notes"></textarea>
         </div>
         <div class="row">
           <div class="col-md-6">

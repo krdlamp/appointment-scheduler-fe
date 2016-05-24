@@ -5,6 +5,7 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="styles/bootswatch-flatly/bootstrap.css">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
@@ -45,26 +46,26 @@
 
             <ul class="nav navbar-nav">
             <li ng-if="authenticated === true"><a href="#/scheduler/appointments">Schedule</a></li>
-            <li ng-if="authenticated === true"><a href="#/scheduler/appointments/history">History</a></li>
+            <li ng-if="authenticated === true"><a href="#/scheduler/appointments/scheduling-transactions">Appointments</a></li>
             <li ng-if="authenticated === true"><a ng-href="#/scheduler">Set Appointment</a></li>
             <li class="dropdown" ng-if="authenticated === true">
               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Appointments <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                  <li><a href="#/scheduler/appointments/my-appointments/scheduled">Scheduled <span class="badge"></span> </a></li>
-                  <li><a href="#/scheduler/appointments/my-appointments/pending">Pending <span class="badge"></span> </a></li>
-                  <li><a href="#/scheduler/appointments/my-appointments/approved">Approved <span class="badge"></span> </a></li>
-                  <li><a href="#/scheduler/appointments/my-appointments/requested">Requested <span class="badge"></span> </a></li>
-                  <li><a href="#/scheduler/appointments/my-appointments/cancelled">Cancelled <span class="badge"></span> </a></li>
+                  <li><a href="#/scheduler/appointments/my-appointments/scheduled">Scheduled <span class="badge">{{ scheduledCount }}</span> </a></li>
+                  <li><a href="#/scheduler/appointments/my-appointments/pending">Pending <span class="badge">{{ pendingCount }}</span> </a></li>
+                  <li><a href="#/scheduler/appointments/my-appointments/approved">Approved <span class="badge">{{ approvedCount }}</span> </a></li>
+                  <li><a href="#/scheduler/appointments/my-appointments/requested">Requested <span class="badge">{{ requestedCount }}</span> </a></li>
+                  <li><a href="#/scheduler/appointments/my-appointments/cancelled">Cancelled <span class="badge">{{ cancelledCount }}</span> </a></li>
               </ul>
             </li>
             <!-- <li><a href="#/scheduler/appointments/my-appointments">My Appointments <span class="badge">5</span> </a></li> -->
-            <li ng-if="authenticated === true"><a href="#/">Notifications <span class="badge">5</span> </a></li>
+            <!-- <li ng-if="authenticated === true"><a href="#/">Notifications <span class="badge">5</span> </a></li> -->
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li ng-if="authenticated != true"><a ng-href="#/register"><span class="fa fa-user"></span> Register</a></li>
                 <li ng-if="authenticated != true"><a ng-href="#/login"><span class="fa fa-sign-in"></span> Sign In</a></li>
                 <li class="dropdown" ng-if="authenticated === true">
-                  <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> {{ currentUser.first_name }} <span class="caret"></span></a>
+                  <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user"></span> {{ currentUser.first_name }} <span class="caret"></span></a>
                   <ul class="dropdown-menu">
                       <li><a href="">Change Password</a></li>
                       <li><a href="" ng-click="logout()">Logout</a></li>
@@ -138,6 +139,7 @@
         <script src="scripts/controllers/appointmentDetailsCtrl.js"></script>
         <script src="scripts/controllers/appointmentListCtrl.js"></script>
         <script src="scripts/controllers/appointmentInvitationsCtrl.js"></script>
+        <script src="scripts/controllers/transactionCtrl.js"></script>
 
         <!-- Services -->
         <script src="scripts/services/employee.js"></script>

@@ -29,6 +29,9 @@
         <ul class="list-group">
             <li class="list-group-item"><label><span class="fa fa-user"></span> Appointment set by:</label> {{ appointment.employee.first_name }} {{ appointment.employee.last_name }}</li>
         </ul>
+        <ul class="list-group">
+            <li class="list-group-item"><label><span class="fa fa-info-circle"></span> Notes:</label> {{ appointment.notes }}</li>
+        </ul>
     </div>
     <a ng-if="appointment.employee_id === user.id" class="pull-right btn btn-primary" href="#/scheduler/appointment/{{appointment.id}}/edit"><span class="panel-title fa fa-edit"></span> Edit</a>
     <div class="row" ng-if="isPending">

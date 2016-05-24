@@ -19,6 +19,7 @@ angular.module('scheduler')
                   appointment_id: data.appointment_id,
                   employee_id   : data.employee_id,
                   status        : data.status,
+                  notes         : data.notes,
               }
           });
       }

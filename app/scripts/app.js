@@ -80,6 +80,10 @@ angular
                     templateUrl: 'views/myappointments.html',
                     controller: 'AppointmentInvitationsCtrl'
                 })
+                .when('/scheduler/appointments/scheduling-transactions', {
+                    templateUrl: 'views/transactions.html',
+                    controller: 'TransactionCtrl'
+                })
                 .when('/scheduler/appointments/my-appointments/scheduled', {
                   templateUrl: 'views/scheduledAppointments.html',
                   controller: 'AppointmentInvitationsCtrl'

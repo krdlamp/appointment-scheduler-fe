@@ -30,6 +30,7 @@ angular.module('scheduler')
                         status            : appointment.status,
                         invitation_status : appointment.invitation_status,
                         venue             : appointment.venue,
+                        notes             : appointment.notes,
                     }
                 });
             },
@@ -53,9 +54,25 @@ angular.module('scheduler')
                      status            : appointment.status,
                      invitation_status : appointment.invitation_status,
                      venue             : appointment.venue,
+                     notes             : appointment.notes,
                    }
                });
             },
+            // cancel: function (appointment) {
+            //    return $http({
+            //        method: 'PUT',
+            //        url: baseUrl + '/' + appointment.id,
+            //        headers: {
+            //            'Content-Type': 'application/json',
+            //            Authorization: 'Bearer' + $auth.getToken()
+            //        },
+            //        data: {
+            //          appointment_id    : appointment.id,
+            //          status            : appointment.status,
+            //          notes             : appointment.notes,
+            //        }
+            //    });
+            // },
             // confirmAttendance: function (data) {
             //     return $http({
             //         method: 'PUT',
