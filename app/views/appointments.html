@@ -1,7 +1,7 @@
 <div class="container">
     <div class="col-sm-6">
         <h3>Today's Schedule, {{ currentDate | date : 'MMMM d, yyyy' }}</h3>
-        <div class="panel panel-default" ng-repeat="present in presentAppointments">
+        <div class="panel panel-default row" ng-repeat="present in presentAppointments">
             <div class="panel-heading">
                 <div class="panel-title">
                     {{ formatTime(present.start_time) | date : 'HH:mm a' : 'UTC+08:00' }} - {{ formatTime(present.end_time) | date : 'HH:mm a' : 'UTC+08:00' }}
@@ -24,14 +24,16 @@
                 </div>
               </div>
               <div class="row">
-                <p><a href="#/scheduler/appointment/{{present.id}}/details">See Details >></a></p>
+                <div class="col-sm-12">
+                  <p><a href="#/scheduler/appointment/{{present.id}}/details">See Details >></a></p>
+                </div>
               </div>
             </div>
         </div>
     </div>
     <div class="col-sm-6">
         <h3>Scheduled Appointments</h3>
-        <div class="panel panel-default" ng-repeat="appointment in appointments">
+        <div class="panel panel-default row" ng-repeat="appointment in appointments">
             <div class="panel-heading">
                 <div class="panel-title">
                     {{ appointment.set_date | date : 'MMMM d, yyyy' }}
@@ -50,11 +52,13 @@
                   <ul>
                     <li ng-repeat="emp in appointment.employees">{{ emp.first_name }} {{ emp.last_name }}</li>
                   </ul>
-                  <p><label>Notes:</label> {{ present.notes }}</p>
+                  <p><label>Notes:</label> {{ appointment.notes }}</p>
                 </div>
               </div>
               <div class="row">
-                <p><a href="#/scheduler/appointment/{{appointment.id}}/details">See Details >></a></p>
+                <div class="col-sm-12">
+                  <p><a href="#/scheduler/appointment/{{appointment.id}}/details">See Details >></a></p>
+                </div>
               </div>
             </div>
         </div>

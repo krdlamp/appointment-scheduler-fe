@@ -52,7 +52,7 @@ angular.module('scheduler')
                 var loginErrorText = error.data.error;
                 var errorMessage;
                 if (loginErrorText === 'invalid_credentials') {
-                  errorMessage = 'Invalid Credentials'
+                  errorMessage = 'Invalid Credentials';
                 }
                 Flash.create('danger', errorMessage);
             });

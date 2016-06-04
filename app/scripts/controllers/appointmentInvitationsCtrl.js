@@ -89,12 +89,35 @@ angular.module('scheduler')
           });
         };
 
+        $scope.getEmps = function(apptId) {
+          Appointment.all().then(function (resp) {
+            var appts = resp.data;
+            angular.forEach(appts, function(value) {
+              if(value.id === apptId) {
+                $scope.emps = value.employees;
+              }
+            });
+          });
+        };
+
         $scope.confirmAttendance = function(appointment) {
             var data = [];
 
             data.appointment_id = appointment.id;
             data.employee_id    = currentUser.id;
             data.status         = 'Attendance Confirmed';
+
+            AppointmentStatus.update(data).then(function () {
+                $location.path('/scheduler/appointments/my-appointments/approved');
+            });
+        };
+
+        $scope.cancelAttendance = function(appointment) {
+            var data = [];
+
+            data.appointment_id = appointment.id;
+            data.employee_id    = currentUser.id;
+            data.status         = 'Attendance Cancelled';
 
             AppointmentStatus.update(data).then(function () {
                 $location.path('/scheduler/appointments/my-appointments/approved');
@@ -131,25 +154,33 @@ angular.module('scheduler')
           data.status             = 'Cancelled';
           data.invitation_status  = appointment.invitation_status;
           data.venue              = appointment.venue;
-          data.notes              = appointment.notes;
-
-
-          //
-          // subject           : appointment.subject,
-          // set_date          : appointment.set_date,
-          // start_time        : appointment.start_time,
-          // end_time          : appointment.end_time,
-          // set_by : appointment.set_by,
-          // purpose           : appointment.purpose,
-          // employees         : appointment.employees,
-          // agendas           : appointment.agendas,
-          // status            : appointment.status,
-          // invitation_status : appointment.invitation_status,
-          // venue             : appointment.venue,
-          // notes             : appointment.notes,
+          data.notes              = reason;
 
           Appointment.patch(data).then(function() {
-            $location.path('/scheduler/appointments/my-appointments/cancelled')
-          })
-        }
-    })
+            $location.path('/scheduler/appointments/my-appointments/cancelled');
+          });
+        };
+
+        $scope.reSched = function(appointment) {
+          var reason = window.prompt("Please state your reasons:");
+          var data = [];
+
+          data.id                 = appointment.id;
+          data.subject            = appointment.subject;
+          data.set_date           = appointment.set_date;
+          data.start_time         = appointment.start_time;
+          data.end_time           = appointment.end_time;
+          data.set_by             = appointment.employee_id;
+          data.purpose            = appointment.purpose;
+          data.employees          = appointment.employees;
+          data.agendas            = appointment.agendas;
+          data.status             = 'Re-scheduled';
+          data.invitation_status  = appointment.invitation_status;
+          data.venue              = appointment.venue;
+          data.notes              = reason;
+
+          Appointment.patch(data).then(function() {
+            $location.path('/scheduler/appointments/my-appointments/requested');
+          });
+        };
+    });

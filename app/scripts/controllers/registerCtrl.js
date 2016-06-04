@@ -2,7 +2,7 @@
 
 angular.module('scheduler')
   .controller('RegisterCtrl', function($route, $auth, $scope, $rootScope, Config, Flash, $http, $location) {
-    var baseUrl = Config.apiBase + '/register';
+    // var baseUrl = Config.apiBase + '/register';
 
     $scope.register = function() {
       if($scope.user.password === $scope.user.password_confirmation) {
@@ -37,6 +37,6 @@ angular.module('scheduler')
         Flash.create('danger', errorMessage);
       }
 
-  }
+  };
 
-})
+});

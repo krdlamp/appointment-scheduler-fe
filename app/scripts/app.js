@@ -63,6 +63,18 @@ angular
                     controller: 'AppointmentCtrl',
                     controllerAs: 'appointment',
                 })
+                .when('/employees', {
+                  templateUrl: 'views/emps.html',
+                  controller: 'EmployeeCtrl'
+                })
+                .when('/employees/add', {
+                  templateUrl: 'views/addEmp.html',
+                  controller: 'EmployeeCtrl'
+                })
+                .when('/employees/:empId/edit', {
+                  templateUrl: 'views/editEmp.html',
+                  controller: 'EmployeeDetailCtrl'
+                })
                 .when('/scheduler/appointment/:apptId/details', {
                     templateUrl: 'views/appointmentDetails.html',
                     controller: 'AppointmentDetailsCtrl',

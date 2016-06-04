@@ -32,19 +32,32 @@
         <ul class="list-group">
             <li class="list-group-item"><label><span class="fa fa-info-circle"></span> Notes:</label> {{ appointment.notes }}</li>
         </ul>
+        <ul class="list-group">
+            <li class="list-group-item"><label><span class="fa fa-info-circle"></span> Status:</label> {{ appointment.status }}</li>
+        </ul>
     </div>
-    <a ng-if="appointment.employee_id === user.id" class="pull-right btn btn-primary" href="#/scheduler/appointment/{{appointment.id}}/edit"><span class="panel-title fa fa-edit"></span> Edit</a>
+    <div class="row" ng-if="appointment.employee_id === user.id">
+        <div class="col-md-6">
+          <a class="pull-left btn btn-primary" href="#/scheduler/appointment/{{appointment.id}}/edit"><span class="panel-title fa fa-edit"></span> Edit</a>
+        </div>
+        <div class="col-md-6" ng-if="isCancelled">
+          <button class="btn btn-success pull-right" ng-click="reSched(appointment)"><span class="fa fa-check"></span> Re-schedule</button>
+        </div>
+        <div class="col-md-6" ng-if="!isCancelled">
+          <button class="btn btn-danger pull-right" ng-click="cancelAppointment(appointment)"><span class="fa fa-remove"></span> Cancel Appointment</button>
+        </div>
+    </div>
     <div class="row" ng-if="isPending">
       <div class="col-md-6">
         <button class="btn btn-warning pull-left"><span class="fa fa-remove"></span> Schedule Not Available</button>
       </div>
       <div class="col-md-6">
-        <button class="btn btn-primary pull-right" ng-click="confirmAttendance(invitation)"><span class="fa fa-check"></span> Confirm Attendance</button>
+        <button class="btn btn-primary pull-right" ng-click="confirmAttendance(appointment)"><span class="fa fa-check"></span> Confirm Attendance</button>
       </div>
     </div>
     <div class="row" ng-if="isApproved">
       <div class="col-md-12">
-        <button class="btn btn-danger pull-right" ng-click="cancelAppointment(invitation)"><span class="fa fa-remove"></span> Cancel Appointment</button>
+        <button class="btn btn-danger pull-right" ng-click="cancelAttendance(appointment)"><span class="fa fa-remove"></span> Cancel Attendance</button>
       </div>
     </div>
 </div>

@@ -1,10 +1,12 @@
 'use strict';
 
 angular.module('scheduler')
-    .controller('AppointmentDetailsCtrl', function(Appointment, Flash, Employee, PersonnelAppointment, Department, $rootScope, $scope, $routeParams, $filter, $uibModal, $location) {
+    .controller('AppointmentDetailsCtrl', function(Appointment, AppointmentStatus, Flash, Employee, PersonnelAppointment, Department, $rootScope, $scope, $routeParams, $filter, $uibModal, $location) {
         if (!$rootScope.authenticated) {
             $location.path('/login');
         }
+
+        var currentUser = JSON.parse(window.localStorage.getItem('user'));
 
         Appointment.all().then(function(resp) {
             $scope.appointments = resp.data;
@@ -26,9 +28,9 @@ angular.module('scheduler')
         $scope.formattedStartTime = formatTime(resp.data.start_time);
         $scope.formattedEndTime   = formatTime(resp.data.end_time);
 
-        var oldDate      = $filter('date')(resp.data.set_date, 'MMMM d, yyyy');
-        var oldStartTime = $filter('date')($scope.formattedStartTime, 'HH:mm a');
-        var oldEndTime   = $filter('date')($scope.formattedEndTime, 'HH:mm a');
+        // var oldDate      = $filter('date')(resp.data.set_date, 'MMMM d, yyyy');
+        // var oldStartTime = $filter('date')($scope.formattedStartTime, 'HH:mm a');
+        // var oldEndTime   = $filter('date')($scope.formattedEndTime, 'HH:mm a');
 
         $scope.date  = $filter('date')($scope.formattedDate, 'MMMM d, yyyy', 'UTC+08:00');
         $scope.start = $filter('date')($scope.formattedStartTime, 'HH:mm a', 'UTC+08:00');
@@ -87,6 +89,12 @@ angular.module('scheduler')
                   console.log($scope.isApproved);
                 }
               }
+              if(value.employee_id === user.id) {
+                if(value.status === "Cancelled") {
+                  $scope.isCancelled = true;
+                  console.log($scope.isCancelled);
+                }
+              }
             });
           });
         });
@@ -122,23 +130,104 @@ angular.module('scheduler')
             $scope.agendas = JSON.parse(window.localStorage.getItem('agendas'));
         };
 
+        $scope.confirmAttendance = function(appointment) {
+            var data = [];
+
+            data.appointment_id = appointment.id;
+            data.employee_id    = currentUser.id;
+            data.status         = 'Attendance Confirmed';
+
+            AppointmentStatus.update(data).then(function () {
+                $location.path('/scheduler/appointments/my-appointments/approved');
+            });
+        };
+
+        $scope.cancelAttendance = function(appointment) {
+            var data = [];
+
+            data.appointment_id = appointment.id;
+            data.employee_id    = currentUser.id;
+            data.status         = 'Attendance Cancelled';
+
+            AppointmentStatus.update(data).then(function () {
+                $location.path('/scheduler/appointments/my-appointments/approved');
+            });
+        };
+
+        $scope.notAvailable = function(appointment) {
+          var reason = window.prompt("Please state your reasons:");
+          var data = [];
+
+          data.appointment_id = appointment.id;
+          data.employee_id    = currentUser.id;
+          data.status         = 'Not Available';
+          data.notes          = reason;
+
+          AppointmentStatus.update(data).then(function() {
+            $location.path('/scheduler/appointments/my-appointments/pending');
+          });
+        };
+
+        $scope.cancelAppointment = function(appointment) {
+          var reason = window.prompt("Please state your reasons:");
+          var data = [];
+
+          data.id                 = appointment.id;
+          data.subject            = appointment.subject;
+          data.set_date           = appointment.set_date;
+          data.start_time         = appointment.start_time;
+          data.end_time           = appointment.end_time;
+          data.set_by             = appointment.employee_id;
+          data.purpose            = appointment.purpose;
+          data.employees          = appointment.employees;
+          data.agendas            = appointment.agendas;
+          data.status             = 'Cancelled';
+          data.venue              = appointment.venue;
+          data.notes              = reason;
+
+          Appointment.patch(data).then(function() {
+            $location.path('/scheduler/appointments/my-appointments/cancelled');
+          });
+        };
+
+        $scope.reSched = function(appointment) {
+          var reason = window.prompt("Please state your reasons:");
+          var data = [];
+
+          data.id                 = appointment.id;
+          data.subject            = appointment.subject;
+          data.set_date           = appointment.set_date;
+          data.start_time         = appointment.start_time;
+          data.end_time           = appointment.end_time;
+          data.set_by             = appointment.employee_id;
+          data.purpose            = appointment.purpose;
+          data.employees          = appointment.employees;
+          data.agendas            = appointment.agendas;
+          data.status             = 'Re-scheduled';
+          data.invitation_status  = appointment.invitation_status;
+          data.venue              = appointment.venue;
+          data.notes              = reason;
+
+          Appointment.patch(data).then(function() {
+            $location.path('/scheduler/appointments/my-appointments/requested');
+          });
+        };
+
         // Set appointment
         $scope.update = function() {
             var data = [];
 
-            data.id          = $scope.appointment.id;
-            data.subject     = $scope.appointment.subject;
-            data.employees   = $scope.selectedEmps.concat($scope.user);
-            data.set_date    = $filter('date')($scope.formattedDate, 'yyyy-MM-dd', 'UTC+08:00');
-            data.start_time  = $filter('date')($scope.formattedStartTime, 'HH:mm a', 'UTC+08:00');
-            data.end_time    = $filter('date')($scope.formattedEndTime, 'HH:mm a', 'UTC+08:00');
-            data.set_by      = $scope.appointment.employee_id;
-            data.purpose     = $scope.appointment.purpose;
-            data.agendas     = $scope.agendas;
-            data.venue       = $scope.appointment.venue;
-            data.invitation_status = 'Pending';
-
-            console.log(data.employees);
+            data.id                = $scope.appointment.id;
+            data.subject           = $scope.appointment.subject;
+            data.employees         = $scope.selectedEmps.concat($scope.user);
+            data.set_date          = $filter('date')($scope.formattedDate, 'yyyy-MM-dd', 'UTC+08:00');
+            data.start_time        = $filter('date')($scope.formattedStartTime, 'HH:mm a', 'UTC+08:00');
+            data.end_time          = $filter('date')($scope.formattedEndTime, 'HH:mm a', 'UTC+08:00');
+            data.set_by            = $scope.appointment.employee_id;
+            data.purpose           = $scope.appointment.purpose;
+            data.agendas           = $scope.agendas;
+            data.venue             = $scope.appointment.venue;
+            data.status            = $scope.appointment.status;
 
             if ($scope.appointments.length > 0) {
                 var conflicts = [];
@@ -166,25 +255,12 @@ angular.module('scheduler')
                 if (conflicts.length > 0) {
                     var message = 'Warning: Time not available!';
                     Flash.create('danger', message, 0, true);
-                    console.log('Time not available');
                 } else {
-                    if ((oldStartTime !== data.start_time) || (oldEndTime !== data.end_time) || (oldDate !== data.set_date)) {
-                        data.status  = 'Re-Scheduled';
-                    } else {
-                        data.status = 'Scheduled';
-                    }
-                    console.log(data);
                     Appointment.patch(data).then(function () {
                         $location.path('/scheduler/appointment/' + $scope.appointment.id + '/details');
                     });
                 }
             } else {
-                if ((oldStartTime !== data.start_time) || (oldEndTime !== data.end_time) || (oldDate !== data.set_date)) {
-                    data.status  = 'Re-Scheduled';
-                } else {
-                    data.status = 'Scheduled';
-                }
-                console.log(data);
                 Appointment.patch(data).then(function () {
                     $location.path('/scheduler/appointment/' + $scope.appointment.id + '/details');
                 });

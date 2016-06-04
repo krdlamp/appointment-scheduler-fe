@@ -52,41 +52,10 @@ angular.module('scheduler')
                      employees         : appointment.employees,
                      agendas           : appointment.agendas,
                      status            : appointment.status,
-                     invitation_status : appointment.invitation_status,
                      venue             : appointment.venue,
                      notes             : appointment.notes,
                    }
                });
             },
-            // cancel: function (appointment) {
-            //    return $http({
-            //        method: 'PUT',
-            //        url: baseUrl + '/' + appointment.id,
-            //        headers: {
-            //            'Content-Type': 'application/json',
-            //            Authorization: 'Bearer' + $auth.getToken()
-            //        },
-            //        data: {
-            //          appointment_id    : appointment.id,
-            //          status            : appointment.status,
-            //          notes             : appointment.notes,
-            //        }
-            //    });
-            // },
-            // confirmAttendance: function (data) {
-            //     return $http({
-            //         method: 'PUT',
-            //         url: statusBaseUrl + '/' + data.appointment_id,
-            //         headers: {
-            //             'Content-Type': 'application/json',
-            //             Authorization: 'Bearer' + $auth.getToken()
-            //         },
-            //         data: {
-            //             appointment_id: data.appointment_id,
-            //             employee_id   : data.employee_id,
-            //             status        : data.status,
-            //         }
-            //     });
-            // }
         };
     });

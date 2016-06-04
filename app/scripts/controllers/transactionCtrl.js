@@ -15,4 +15,4 @@ angular.module('scheduler')
       $scope.appointments = resp.data;
     });
 
-  })
+  });
